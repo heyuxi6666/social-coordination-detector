@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "coordination-detector"
+version = "1.0.0"
+description = "Offline detection of coordinated-looking engagement in saved public social-media data"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+dependencies = []
+
+[project.scripts]
+coordination-detector = "coordination_detector.cli:main"
+
+[tool.setuptools]
+packages = ["coordination_detector"]
