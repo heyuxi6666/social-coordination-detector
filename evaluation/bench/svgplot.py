@@ -5,15 +5,17 @@ from __future__ import annotations
 import math
 from xml.sax.saxutils import escape
 
-COLORS = {"A_overlap_only": "#E69F00", "B_time_bucket": "#009E73", "C_v1": "#0072B2"}     # colour-blind-safe
-MARKERS = {"A_overlap_only": "square", "B_time_bucket": "triangle", "C_v1": "circle"}
-DASH = {"A_overlap_only": "6 3", "B_time_bucket": "2 3", "C_v1": ""}
+COLORS = {"A_overlap_only": "#E69F00", "B_time_bucket": "#009E73", "B_tuned": "#CC79A7", "C_v1": "#0072B2"}     # colour-blind-safe
+MARKERS = {"A_overlap_only": "square", "B_time_bucket": "triangle", "B_tuned": "diamond", "C_v1": "circle"}
+DASH = {"A_overlap_only": "6 3", "B_time_bucket": "2 3", "B_tuned": "8 3 2 3", "C_v1": ""}
 PANEL_W, PANEL_H, MARGIN_L, MARGIN_R, MARGIN_T, MARGIN_B = 380, 260, 58, 16, 44, 56
 
 
 def _marker(kind: str, x: float, y: float, color: str) -> str:
     if kind == "square":
         return f'<rect x="{x - 4:.1f}" y="{y - 4:.1f}" width="8" height="8" fill="{color}"/>'
+    if kind == "diamond":
+        return f'<polygon points="{x:.1f},{y - 5:.1f} {x + 5:.1f},{y:.1f} {x:.1f},{y + 5:.1f} {x - 5:.1f},{y:.1f}" fill="{color}"/>'
     if kind == "triangle":
         return f'<polygon points="{x:.1f},{y - 5:.1f} {x - 5:.1f},{y + 4:.1f} {x + 5:.1f},{y + 4:.1f}" fill="{color}"/>'
     return f'<circle cx="{x:.1f}" cy="{y:.1f}" r="4" fill="{color}"/>'

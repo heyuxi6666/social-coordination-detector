@@ -15,6 +15,9 @@ World model (deliberately simple, stated so that its biases can be judged):
   with probability `rotation` (the new account keeps the slot's personal delay);
 * `loyal_followers`: one author's `loyal_posts` posts are liked by the same followers; with a short
   `loyal_delay_mean` this is a notification burst.  Both are ordinary behaviour, so they are negatives;
+* `delay_mode`: "fixed" (default) gives each group slot one personal delay reused on every coordinated post;
+  "random" draws every delay independently per account and post (uniform over `cohort_spread`), so there is no
+  repeated per-account offset for a fixed-delay test to find;
 * `id_adjacent` / `repost_signal`: give the group consecutive account ids and inflated repost counts, the two
   side signals the V1 example plants.  Off by default so the main results do not lean on them.
 """
@@ -31,6 +34,7 @@ POPULATION_IDS = range(10_000, 90_000)
 RESERVE_IDS = range(100_000, 400_000)
 ADJACENT_START = 95_000
 MIN_AUDIENCE = 10
+DELAY_MODES = ("fixed", "random")
 
 
 @dataclass(frozen=True)
@@ -54,12 +58,15 @@ class Scenario:
     id_adjacent: bool = False
     repost_signal: bool = False
     hours: float = 48.0
+    delay_mode: str = "fixed"
 
     def validate(self) -> None:
         if not 0 < self.participation <= 1 or not 0 <= self.rotation <= 1:
             raise ValueError("participation must be in (0, 1] and rotation in [0, 1]")
         if min(self.jitter, self.group_size, self.loyal_followers, self.heavy_frac) < 0 or self.heavy_weight <= 0:
             raise ValueError("jitter, group_size, loyal_followers and heavy_frac must be non-negative; heavy_weight positive")
+        if self.delay_mode not in DELAY_MODES:
+            raise ValueError(f"delay_mode must be one of {DELAY_MODES}")
         if self.group_size and self.coord_posts < 2:
             raise ValueError("a coordinated group needs at least two coordinated posts")
         if self.n_organic < 3:
@@ -139,7 +146,8 @@ def generate(scenario: Scenario, seed: int) -> tuple[dict[str, Any], Truth]:
                         slot["account"] = next(fresh)
             for slot in slots:
                 if rng.random() < s.participation:
-                    times[slot["account"]] = when + max(0.5, slot["base"] + rng.gauss(0.0, s.jitter))
+                    delay = slot["base"] if s.delay_mode == "fixed" else rng.uniform(1.0, max(s.cohort_spread, 1.0))
+                    times[slot["account"]] = when + max(0.5, delay + rng.gauss(0.0, s.jitter))
                     coord_accounts.add(slot["account"])
                     acting += 1
             coordinated_seen += 1

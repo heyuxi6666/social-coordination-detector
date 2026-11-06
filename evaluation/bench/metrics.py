@@ -37,8 +37,9 @@ def score_groups(groups: list[dict[str, set]], truth_posts: set, truth_accounts:
     matched = [g for g in groups if truth_posts and
                len(g["posts"] & truth_posts) / len(g["posts"] | truth_posts) >= GROUP_MATCH_JACCARD]
     negatives = len(all_accounts - truth_accounts)
+    fragments = [g for g in groups if g not in matched and len(g["posts"] & truth_posts) >= 2]
     return {"n_groups": len(groups), "detected": (1 if matched else 0) if truth_posts else "",
-            "spurious_groups": len(groups) - len(matched), "tp": tp, "fp": fp, "fn": fn,
+            "spurious_groups": len(groups) - len(matched), "fragment_groups": len(fragments), "tp": tp, "fp": fp, "fn": fn,
             "negatives": negatives, "any_group": 1 if groups else 0}
 
 
@@ -75,6 +76,7 @@ def summarise(rows: list[dict[str, Any]]) -> dict[str, Any]:
                    precision=tp / (tp + fp) if tp + fp else "", recall=tp / (tp + fn) if tp + fn else "",
                    f1_micro=f1_from_counts(tp, fp, fn), f1_seed_mean=f1_mean, f1_seed_se=f1_se,
                    spurious_per_dataset=statistics.fmean(r["spurious_groups"] for r in coordinated),
+                   fragments_per_dataset=statistics.fmean(r.get("fragment_groups", 0) for r in coordinated),
                    account_fpr=sum(r["fp"] for r in coordinated) / max(1, sum(r["negatives"] for r in coordinated)))
         traced = [r for r in coordinated if r.get("trace_built") not in ("", None)]
         if traced:

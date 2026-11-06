@@ -21,13 +21,13 @@ sys.path.insert(0, str(HERE))
 
 from bench import metrics, svgplot  # noqa: E402
 
-NUMERIC = {"seed", "n_groups", "detected", "spurious_groups", "tp", "fp", "fn", "negatives", "any_group", "runtime_s",
+NUMERIC = {"seed", "n_groups", "detected", "spurious_groups", "fragment_groups", "tp", "fp", "fn", "negatives", "any_group", "runtime_s",
            "trace_built", "trace_post_recall", "trace_post_precision", "trace_cohort_recall", "trace_runtime_s"}
 MAIN_METHODS = ("A_overlap_only", "B_time_bucket", "C_v1")
 METHOD_NAMES = {"A_overlap_only": "A overlap-only", "B_time_bucket": "B time-bucket", "C_v1": "C V1 (strong+moderate)",
                 "C_v1_strong": "C V1 (strong only)"}
 SUMMARY_FIELDS = ["experiment", "config_id", "label", "rq", "method", "n_seeds", "detect_rate", "detect_lo", "detect_hi",
-                  "precision", "recall", "f1_micro", "f1_seed_mean", "f1_seed_se", "spurious_per_dataset", "account_fpr",
+                  "precision", "recall", "f1_micro", "f1_seed_mean", "f1_seed_se", "spurious_per_dataset", "fragments_per_dataset", "account_fpr",
                   "null_fp_rate", "null_fp_lo", "null_fp_hi", "null_groups_per_dataset", "null_account_fpr",
                   "trace_built_rate", "trace_post_recall", "trace_post_precision", "runtime_ms_median"]
 

@@ -8,20 +8,23 @@ from typing import Any, Iterable
 from . import generator, methods, metrics
 
 ROW_COLUMNS = (["experiment", "config_id", "label", "rq", "seed", "method"] + list(generator.PARAMETER_NAMES)
-               + ["n_groups", "detected", "spurious_groups", "tp", "fp", "fn", "negatives", "any_group", "runtime_s",
+               + ["n_groups", "detected", "spurious_groups", "fragment_groups", "tp", "fp", "fn", "negatives", "any_group", "runtime_s",
                   "trace_built", "trace_post_recall", "trace_post_precision", "trace_cohort_recall", "trace_runtime_s"])
 
 
-def run_dataset(scenario: generator.Scenario, seed: int, trace: bool = False) -> list[dict[str, Any]]:
+def run_dataset(scenario: generator.Scenario, seed: int, trace: bool = False,
+                tuned: dict[str, int] | None = None) -> list[dict[str, Any]]:
     loaded, truth = generator.generate(scenario, seed)
     seen = set().union(*(p["likers"] for p in loaded["posts"].values()))
     outputs: dict[str, tuple[list, float]] = {}
     outputs["A_overlap_only"] = methods.timed(methods.overlap_only, loaded)
     outputs["B_time_bucket"] = methods.timed(methods.time_bucket, loaded)
+    if tuned:
+        outputs[methods.TUNED] = methods.timed(methods.time_bucket, loaded, tuned["bucket_seconds"], tuned["min_group_accounts"])
     v1, seconds = methods.timed(methods.v1_detector, loaded)
     outputs["C_v1"], outputs["C_v1_strong"] = (v1["C"], seconds), (v1["C_strong"], seconds)
     rows = []
-    for name in methods.METHODS:
+    for name in [m for m in (*methods.METHODS, methods.TUNED) if m in outputs]:
         groups, seconds = outputs[name]
         row = metrics.score_groups(groups, set(truth.coord_posts), set(truth.coord_accounts), seen)
         row.update(method=name, runtime_s=seconds, seed=seed)
@@ -59,11 +62,11 @@ def expand(config: dict[str, Any]) -> list[dict[str, Any]]:
     return out
 
 
-def run_config(entry: dict[str, Any], seeds: Iterable[int]) -> list[dict[str, Any]]:
+def run_config(entry: dict[str, Any], seeds: Iterable[int], tuned: dict[str, int] | None = None) -> list[dict[str, Any]]:
     scenario = generator.Scenario(**entry["params"])
     rows = []
     for seed in seeds:
-        for row in run_dataset(scenario, seed, entry["trace"]):
+        for row in run_dataset(scenario, seed, entry["trace"], tuned):
             row.update({k: entry[k] for k in ("experiment", "config_id", "label", "rq")}, **asdict(scenario))
             rows.append(row)
     return rows

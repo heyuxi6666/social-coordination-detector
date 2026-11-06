@@ -62,3 +62,34 @@ Number of accounts (`n_accounts`) and posts (`n_posts`), coordinated group size 
 ## Privacy
 
 Only synthetic data are used. The folder contains no real accounts, posts, credentials or platform logs; `python tools/check_release.py` checks the tree before publication.
+
+## Phase 2: tuned baseline on held-out seeds
+
+Protocol (fixed before tuning and before the held-out run): [PHASE2_PROTOCOL.md](PHASE2_PROTOCOL.md). Results: `results_phase2/` (Phase 1 results in `results/` are kept unchanged).
+
+| Split | Seeds | Purpose |
+|---|---|---|
+| Tuning | 2000-2019 | choose the time-bucket baseline's bucket width and minimum group size (42-cell grid, 11 scenarios) |
+| Held-out | 5000-5029 (30 seeds) | every reported Phase 2 number |
+
+```bash
+python evaluation/tune_baseline.py                  # tuning seeds only -> results_phase2/tuning_grid.csv, tuned_parameters.json
+python evaluation/run_experiments.py --config evaluation/configs/phase2.json \
+       --tuned evaluation/results_phase2/tuned_parameters.json --out evaluation/results_phase2    # about 10 minutes
+python evaluation/summarize_phase2.py               # summary.csv, paired_comparisons.csv, tables.md, figures/fig3-5
+python -m unittest discover -s tests                # includes checks that every committed table regenerates from the raw CSV
+```
+
+Selected parameters (tuning seeds only): bucket 2400 s, minimum group 15 accounts. Tuning score 0.691 against 0.677 for the original 300 s / 5, so tuning changed little overall, but it changed behaviour a lot in specific scenarios (wide spread, random delays). V1 and the overlap baseline were not tuned, and V1's code is unmodified.
+
+New generator options: `delay_mode` ("fixed" or "random": independently redrawn delay per account and post) and `cohort_spread` up to 2000 s. New metric: fragment groups (unmatched groups containing at least two true coordinated posts), reported next to spurious groups.
+
+### Additional limitations (Phase 2)
+
+14. **Tuning and test families overlap.** The 11 tuning scenarios come from the same families as the held-out experiments (different seeds, some different parameter values). Held-out seeds were never used to choose anything, but the baseline was tuned on the kinds of scenarios it is then tested on. V1 got no such tuning.
+15. **The objective is a choice.** F1 minus false-positive rate, weighted equally across scenarios, accepted a baseline that still flags every notification-burst dataset because the F1 gains elsewhere outweighed one of four negative scenarios. A different objective (for example, a hard cap on false positives) would select different parameters and could change the comparison.
+16. **Random-delay scenarios are blind to V1 by construction.** V1 tests for a repeated per-account offset; with `delay_mode: random` no such offset exists, so its failure there is expected. The result shows what V1 cannot see; it does not show that the groups are undetectable.
+17. **Tiny differences are labelled.** "Better"/"worse" in the paired tables only means the 95% interval of the mean per-seed difference excludes zero. Some flagged differences are about 0.01 F1 and not practically meaningful. There is no multiple-comparison correction across the 43 configurations.
+18. **Zero-variance cells.** Many cells have identical outcomes on all 30 seeds (for example 1.00 detection); intervals there are Wilson bounds, not evidence of exactly 100%.
+19. **Rotation and group size interact with the group-match rule.** Under rotation V1 often returns fragments; whether that counts as detection depends on the Jaccard 0.5 rule.
+20. **Unmeasured dimensions.** Scale beyond 30 posts, adversaries that adapt to the detector, real follower graphs, and tuned versions of V1 or the overlap baseline were not evaluated.

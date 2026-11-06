@@ -1,0 +1,21 @@
+{
+  "base_seed": 2000,
+  "seeds": 20,
+  "grid": {
+    "bucket_seconds": [60, 120, 300, 600, 1200, 2400, 3600],
+    "min_group_accounts": [3, 5, 8, 10, 15, 20]
+  },
+  "scenarios": [
+    {"label": "coordinated, default", "params": {}},
+    {"label": "coordinated, spread 600 s", "params": {"cohort_spread": 600}},
+    {"label": "coordinated, spread 2000 s", "params": {"cohort_spread": 2000}},
+    {"label": "coordinated, participation 0.6", "params": {"participation": 0.6}},
+    {"label": "coordinated, jitter 20 s", "params": {"jitter": 20}},
+    {"label": "coordinated, independent random delays, spread 600 s", "params": {"delay_mode": "random", "cohort_spread": 600}},
+    {"label": "coordinated, rotation 0.2", "params": {"rotation": 0.2}},
+    {"label": "organic-only", "params": {"group_size": 0}},
+    {"label": "organic + loyal followers", "params": {"group_size": 0, "loyal_followers": 35}},
+    {"label": "organic + notification burst 45 s", "params": {"group_size": 0, "loyal_followers": 35, "loyal_delay_mean": 45}},
+    {"label": "organic, heavy-user weight 20", "params": {"group_size": 0, "heavy_weight": 20}}
+  ]
+}

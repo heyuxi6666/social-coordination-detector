@@ -36,24 +36,26 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--config", type=Path, default=HERE / "configs" / "experiments.json")
     parser.add_argument("--out", type=Path, default=HERE / "results")
     parser.add_argument("--seeds", type=int, help="override the number of seeds per configuration")
+    parser.add_argument("--tuned", type=Path, help="tuned_parameters.json from tune_baseline.py; adds the B_tuned method")
     parser.add_argument("--only", nargs="*", default=[], metavar="EXPERIMENT_ID")
     args = parser.parse_args(argv)
     config = json.loads(args.config.read_text(encoding="utf-8"))
     n_seeds = args.seeds or config["seeds"]
     seeds = [config["base_seed"] + i for i in range(n_seeds)]
+    tuned = json.loads(args.tuned.read_text(encoding="utf-8"))["parameters"] if args.tuned else None
     entries = []
     for experiment in config["experiments"]:
         if not args.only or experiment["id"] in args.only:
             entries += runner.expand({**experiment, "defaults": config.get("defaults", {})})
     rows = []
     for number, entry in enumerate(entries, 1):
-        rows += runner.run_config(entry, seeds)
+        rows += runner.run_config(entry, seeds, tuned)
         print(f"[{number}/{len(entries)}] {entry['config_id']}", flush=True)
     args.out.mkdir(parents=True, exist_ok=True)
     write_rows(args.out / "raw_results.csv", rows)
     meta = {"python": platform.python_version(), "platform": platform.platform(), "seeds": seeds,
             "configurations": len(entries), "datasets": len(entries) * len(seeds), "rows": len(rows),
-            "config_file": args.config.name}
+            "config_file": args.config.name, "tuned_baseline": tuned}
     (args.out / "run_info.json").write_bytes((json.dumps(meta, indent=2) + "\n").encode("utf-8"))
     print(f"wrote {len(rows)} rows for {meta['datasets']} datasets to {args.out}")
     return 0

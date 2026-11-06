@@ -6,7 +6,9 @@ predicted groups; group-level scoring compares post sets (see metrics.py).
 
 A  overlap-only   V1's own group-formation step (pairwise liker overlap, hypergeometric tail, Bonferroni) with
                   no timing test and no indicators.  Accounts: those liking at least half of a group's posts.
-B  time-bucket    a SynchroTrap-style co-action baseline: two accounts are linked when they like the same posts
+B  time-bucket    (original: 300 s bucket, groups of >= 5 accounts; B_tuned: bucket width and minimum group
+                  size chosen on separate tuning seeds, see evaluation/tune_baseline.py)
+                  a SynchroTrap-style co-action baseline: two accounts are linked when they like the same posts
                   inside the same fixed time bucket often enough; linked accounts form groups.
 C  V1 detector    coordination_detector.detector.analyse.  Flagged groups: tier "strong" or "moderate" (the tiers
                   the project treats as worth human review; chosen before any result was seen); "C_strong"
@@ -82,12 +84,13 @@ def overlap_only(loaded: dict[str, Any]) -> list[Group]:
     return groups
 
 
-def time_bucket(loaded: dict[str, Any]) -> list[Group]:
+def time_bucket(loaded: dict[str, Any], bucket_seconds: int = BUCKET_SECONDS,
+                min_group_accounts: int = MIN_GROUP_ACCOUNTS) -> list[Group]:
     items: dict[tuple[int, int], list[int]] = defaultdict(list)
     per_account: dict[int, set] = defaultdict(set)
     for pid, post in loaded["posts"].items():
         for account, moment in (post.get("liked_at") or {}).items():
-            item = (pid, int(moment // BUCKET_SECONDS))
+            item = (pid, int(moment // bucket_seconds))
             items[item].append(account)
             per_account[account].add(item)
     shared: dict[tuple[int, int], int] = defaultdict(int)
@@ -98,7 +101,7 @@ def time_bucket(loaded: dict[str, Any]) -> list[Group]:
              if n >= MIN_SHARED_ITEMS and n / (len(per_account[a]) + len(per_account[b]) - n) >= MIN_ITEM_JACCARD]
     groups = []
     for comp in _components(edges):
-        if len(comp) < MIN_GROUP_ACCOUNTS:
+        if len(comp) < min_group_accounts:
             continue
         liked: dict[int, int] = defaultdict(int)
         for account in comp:
@@ -136,3 +139,4 @@ def timed(function: Callable[..., Any], *args: Any) -> tuple[Any, float]:
 
 
 METHODS = ("A_overlap_only", "B_time_bucket", "C_v1", "C_v1_strong")
+TUNED = "B_tuned"                       # added when tuned parameters are supplied (Phase 2)
