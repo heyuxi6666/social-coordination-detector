@@ -141,11 +141,11 @@ def figures(summary: list[dict], out_dir: Path) -> list[Path]:
     fig1 = svgplot.two_panel_chart(
         [panel(summary, "E1_jitter", "jitter", "f1", "(a) Timing jitter", "jitter sd per like (s)", "account F1 (mean, 95% CI)"),
          panel(summary, "E2_participation", "participation", "f1", "(b) Participation", "share of group acting per post", "account F1 (mean, 95% CI)")],
-        legend, "Figure 1 (RQ2). 20 seeds per point; synthetic data; defaults: 40-account group, 6 coordinated posts, 30 posts.")
+        legend, "Figure 1 (RQ2). 20 seeds per point; synthetic; categorical x axis; points offset by method; group of 40, 6 coordinated posts.")
     fig2 = svgplot.two_panel_chart(
         [panel(summary, "E6_rotation", "rotation", "f1", "(a) Account rotation: account F1", "slot replacement probability", "account F1 (mean, 95% CI)"),
          panel(summary, "E6_rotation", "rotation", "detect", "(b) Account rotation: group detection", "slot replacement probability", "datasets with group detected (95% CI)")],
-        legend, "Figure 2 (RQ3). 20 seeds per point; synthetic data; the new account inherits the replaced account's delay.")
+        legend, "Figure 2 (RQ3). 20 seeds per point; synthetic; categorical x axis; points offset by method; new accounts keep the slot delay.")
     paths = [out_dir / "fig1_robustness_jitter_participation.svg", out_dir / "fig2_rotation.svg"]
     for path, text in zip(paths, (fig1, fig2)):
         path.write_bytes(text.encode("utf-8"))

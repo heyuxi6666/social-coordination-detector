@@ -168,15 +168,15 @@ def figures(summary: list[dict], out_dir: Path) -> list[Path]:
         "fig3_cohort_spread_and_random_delays.svg": svgplot.two_panel_chart(
             [panel(summary, "P2_cohort_spread", "cohort_spread", "f1", "(a) Fixed per-account delays", "cohort spread (s)", f1),
              panel(summary, "P3_random_delays", "cohort_spread", "f1", "(b) Independent random delays", "delay range (s)", f1)],
-            LEGEND, "Figure 3. 30 held-out seeds per point; synthetic data. Delays are repeated per account in (a) and redrawn per post in (b)."),
+            LEGEND, "Figure 3. 30 held-out seeds per point; synthetic data; categorical x axis; points offset horizontally by method."),
         "fig4_notification_bursts_and_participation.svg": svgplot.two_panel_chart(
             [panel(summary, "P6_notification_bursts", "loyal_delay_mean", "fp", "(a) Notification bursts, organic data", "mean delay of the audience (s)", "datasets with a flagged group (95% CI)"),
              panel(summary, "P4_participation", "participation", "f1", "(b) Partial participation", "share of group acting per post", f1)],
-            LEGEND, "Figure 4. 30 held-out seeds per point; synthetic data. In (a) every flagged group is a false positive."),
+            LEGEND, "Figure 4. 30 held-out seeds; synthetic; categorical x axis; points offset by method. In (a) every flag is a false positive."),
         "fig5_rotation_and_jitter.svg": svgplot.two_panel_chart(
             [panel(summary, "P5_rotation", "rotation", "f1", "(a) Account rotation", "slot replacement probability", f1),
              panel(summary, "P8_jitter", "jitter", "f1", "(b) Timing jitter", "jitter sd per like (s)", f1)],
-            LEGEND, "Figure 5. 30 held-out seeds per point; synthetic data."),
+            LEGEND, "Figure 5. 30 held-out seeds per point; synthetic data; categorical x axis; points offset horizontally by method."),
     }
     paths = []
     for name, text in charts.items():

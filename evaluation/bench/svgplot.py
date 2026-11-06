@@ -9,42 +9,49 @@ COLORS = {"A_overlap_only": "#E69F00", "B_time_bucket": "#009E73", "B_tuned": "#
 MARKERS = {"A_overlap_only": "square", "B_time_bucket": "triangle", "B_tuned": "diamond", "C_v1": "circle"}
 DASH = {"A_overlap_only": "6 3", "B_time_bucket": "2 3", "B_tuned": "8 3 2 3", "C_v1": ""}
 PANEL_W, PANEL_H, MARGIN_L, MARGIN_R, MARGIN_T, MARGIN_B = 380, 260, 58, 16, 44, 56
+PAD = 16                       # px of inner padding so offset markers clear the axis labels
+DODGE = 5                      # px between methods at the same x, so overlapping points stay visible
+OUTLINE = ' stroke="#ffffff" stroke-width="0.8"'
 
 
 def _marker(kind: str, x: float, y: float, color: str) -> str:
     if kind == "square":
-        return f'<rect x="{x - 4:.1f}" y="{y - 4:.1f}" width="8" height="8" fill="{color}"/>'
+        return f'<rect x="{x - 4:.1f}" y="{y - 4:.1f}" width="8" height="8" fill="{color}"{OUTLINE}/>'
     if kind == "diamond":
-        return f'<polygon points="{x:.1f},{y - 5:.1f} {x + 5:.1f},{y:.1f} {x:.1f},{y + 5:.1f} {x - 5:.1f},{y:.1f}" fill="{color}"/>'
+        return f'<polygon points="{x:.1f},{y - 5:.1f} {x + 5:.1f},{y:.1f} {x:.1f},{y + 5:.1f} {x - 5:.1f},{y:.1f}" fill="{color}"{OUTLINE}/>'
     if kind == "triangle":
-        return f'<polygon points="{x:.1f},{y - 5:.1f} {x - 5:.1f},{y + 4:.1f} {x + 5:.1f},{y + 4:.1f}" fill="{color}"/>'
-    return f'<circle cx="{x:.1f}" cy="{y:.1f}" r="4" fill="{color}"/>'
+        return f'<polygon points="{x:.1f},{y - 5:.1f} {x - 5:.1f},{y + 4:.1f} {x + 5:.1f},{y + 4:.1f}" fill="{color}"{OUTLINE}/>'
+    return f'<circle cx="{x:.1f}" cy="{y:.1f}" r="4" fill="{color}"{OUTLINE}/>'
 
 
 def _panel(panel: dict, left: float) -> list[str]:
     plot_w, plot_h = PANEL_W - MARGIN_L - MARGIN_R, PANEL_H - MARGIN_T - MARGIN_B
     labels = panel["x_labels"]
-    step = plot_w / max(1, len(labels) - 1) if len(labels) > 1 else 0
-    px = lambda i: left + MARGIN_L + (i * step if len(labels) > 1 else plot_w / 2)
+    step = (plot_w - 2 * PAD) / max(1, len(labels) - 1) if len(labels) > 1 else 0
+    px = lambda i: left + MARGIN_L + (PAD + i * step if len(labels) > 1 else plot_w / 2)
     py = lambda v: MARGIN_T + plot_h * (1 - min(max(v, 0.0), 1.0))
     out = [f'<text x="{left + MARGIN_L:.0f}" y="20" class="title">{escape(panel["title"])}</text>']
     for tick in (0, 0.25, 0.5, 0.75, 1.0):
         y = py(tick)
         out.append(f'<line x1="{left + MARGIN_L}" x2="{left + MARGIN_L + plot_w}" y1="{y:.1f}" y2="{y:.1f}" class="grid"/>')
-        out.append(f'<text x="{left + MARGIN_L - 6}" y="{y + 4:.1f}" class="tick" text-anchor="end">{tick:g}</text>')
+        out.append(f'<text x="{left + MARGIN_L - 6}" y="{y + 4:.1f}" class="tick" text-anchor="end">{tick:.2f}</text>')
     for i, label in enumerate(labels):
         out.append(f'<text x="{px(i):.1f}" y="{MARGIN_T + plot_h + 16}" class="tick" text-anchor="middle">{escape(str(label))}</text>')
     out.append(f'<text x="{left + MARGIN_L + plot_w / 2:.0f}" y="{PANEL_H - 10}" class="axis" text-anchor="middle">{escape(panel["xlabel"])}</text>')
     out.append(f'<text transform="translate({left + 14:.0f},{MARGIN_T + plot_h / 2:.0f}) rotate(-90)" class="axis" text-anchor="middle">{escape(panel["ylabel"])}</text>')
-    for name, points in panel["series"].items():
+    names = list(panel["series"])
+    for rank, name in enumerate(names):
+        points = panel["series"][name]
+        shift = (rank - (len(names) - 1) / 2) * DODGE
+        qx = lambda i, shift=shift: px(i) + shift
         color = COLORS.get(name, "#555555")
         valid = [(i, p) for i, p in enumerate(points) if p is not None and not math.isnan(p[0])]
-        path = " ".join(f'{"M" if k == 0 else "L"}{px(i):.1f},{py(p[0]):.1f}' for k, (i, p) in enumerate(valid))
+        path = " ".join(f'{"M" if k == 0 else "L"}{qx(i):.1f},{py(p[0]):.1f}' for k, (i, p) in enumerate(valid))
         dash = f' stroke-dasharray="{DASH.get(name, "")}"' if DASH.get(name) else ""
         out.append(f'<path d="{path}" fill="none" stroke="{color}" stroke-width="2"{dash}/>')
         for i, (value, lo, hi) in valid:
-            out.append(f'<line x1="{px(i):.1f}" x2="{px(i):.1f}" y1="{py(lo):.1f}" y2="{py(hi):.1f}" stroke="{color}" stroke-width="1.2"/>')
-            out.append(_marker(MARKERS.get(name, "circle"), px(i), py(value), color))
+            out.append(f'<line x1="{qx(i):.1f}" x2="{qx(i):.1f}" y1="{py(lo):.1f}" y2="{py(hi):.1f}" stroke="{color}" stroke-width="1.2"/>')
+            out.append(_marker(MARKERS.get(name, "circle"), qx(i), py(value), color))
     return out
 
 
