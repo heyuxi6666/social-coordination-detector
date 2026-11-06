@@ -88,6 +88,10 @@ python -m unittest discover -s tests
 
 The tests cover the statistics, each timing label, tier rules, the false-positive controls, the network tracer, CLI determinism, reproducibility of the example, and the release hygiene check.
 
+## Evaluation (research branch)
+
+`evaluation/` holds a reproducible synthetic benchmark that compares this detector with an overlap-only baseline and a time-bucket co-action baseline under jitter, partial participation, audience noise and account rotation. Questions and hypotheses: [RESEARCH_QUESTIONS.md](RESEARCH_QUESTIONS.md). Method, reproduction steps and limitations: [evaluation/README.md](evaluation/README.md). Results use synthetic data only and say nothing about accuracy on a real platform.
+
 ## Layout
 
 ```
