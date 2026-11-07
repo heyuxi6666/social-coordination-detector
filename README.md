@@ -2,6 +2,8 @@
 
 Offline detection of **coordinated-looking engagement** in saved public social-media data: groups of accounts that like the same posts, in the same order, with the same delay each time.
 
+**Research report:** [research_report/Yuxi_He_Research_Report.pdf](research_report/Yuxi_He_Research_Report.pdf) (4 pages): a synthetic-benchmark evaluation of this detector against two baselines. See [Research evaluation](#research-evaluation) below.
+
 It reads JSON files you have already collected and writes evidence reports. It makes no network calls, needs no credentials, and uses only the Python standard library (3.9+).
 
 > **What it is not.** The output is a statistical anomaly report. It does not prove coordinated inauthentic behaviour, shared ownership or a rule violation. Only the platform can establish those, because only the platform holds the account-control signals. See [METHODS.md](METHODS.md) for what each indicator means and where it can mislead.
@@ -88,17 +90,80 @@ python -m unittest discover -s tests
 
 The tests cover the statistics, each timing label, tier rules, the false-positive controls, the network tracer, CLI determinism, reproducibility of the example, and the release hygiene check.
 
-## Evaluation (research branch)
+## Research evaluation
 
-`evaluation/` holds a reproducible synthetic benchmark that compares this detector with an overlap-only baseline and a time-bucket co-action baseline under jitter, partial participation, audience noise and account rotation. Questions and hypotheses: [RESEARCH_QUESTIONS.md](RESEARCH_QUESTIONS.md). Method, reproduction steps and limitations: [evaluation/README.md](evaluation/README.md). Results use synthetic data only and say nothing about accuracy on a real platform.
+### Motivation
+
+Synchrony (accounts acting on the same objects at nearly the same time) is a standard signal for coordinated behaviour, but ordinary audiences are synchronised too: followers react to a notification within seconds, and loyal followers like most of an author's posts. This project asks what a detector gains, and loses, by requiring something narrower: that the **same accounts repeat their own fixed delay** from one post to the next. It is an evaluation of that one design, not a new detection principle. The detector uses statistics only (hypergeometric tails, permutation tests, robust z-scores); there is **no machine learning**.
+
+### Methods compared
+
+| | Method | What it uses |
+|---|---|---|
+| A | Overlap-only | V1's group-forming step alone: pairwise liker overlap with a Bonferroni-corrected hypergeometric test; no timing |
+| B | Time-bucket co-action | A simplified SynchroTrap-style baseline (not a reimplementation): accounts that share at least 3 (post, time-bucket) items. Run with the original setting (300 s, groups of 5) and a **tuned** setting (2,400 s, groups of 15) chosen on separate tuning seeds |
+| C | V1 detector | Overlap groups plus a seeded permutation test for a repeated per-account fixed delay, with same-session and single-burst guards. See [METHODS.md](METHODS.md) |
+
+### Design
+
+- **Synthetic data only.** A seeded generator builds datasets with known ground truth (group size, jitter, participation, rotation, cohort spread, random delays, audience size, heavy users, loyal audiences, notification bursts). The benchmark code reads no external data.
+- **Disjoint seeds.** Tuning seeds 2000-2019 (used only to tune baseline B) and held-out seeds 5000-5029 (30 per configuration, 43 configurations, 1,290 datasets). V1 and baseline A are not tuned.
+- **Protocol first.** Questions and hypotheses: [RESEARCH_QUESTIONS.md](RESEARCH_QUESTIONS.md); held-out protocol: [evaluation/PHASE2_PROTOCOL.md](evaluation/PHASE2_PROTOCOL.md).
+
+### Results (held-out seeds, synthetic data)
+
+| Condition | A overlap-only | B tuned | C V1 |
+|---|---|---|---|
+| Organic-only datasets flagged (of 390) | 242 | 167 | 0 |
+| Independent random delays (range 600 s): account F1 | 0.98 | 1.00 | 0.00 |
+| Participation 0.4: account F1 | 0.00 | 0.43 | 0.00 |
+| Timing jitter sd 40 s: account F1 | 0.98 | 1.00 | 0.42 |
+| Account rotation 0.1: account F1 | 0.82 | 0.83 | 0.91 |
+
+V1 flagged none of the 390 organic-only datasets, including audiences that react within seconds of a post, where both time-bucket variants raise false alarms. In exchange it is clearly worse when coordinated accounts randomise their delays, act on only part of the posts, jitter by 40 s or more, or rotate at higher rates, and it is much slower than the tuned baseline (176.5 ms vs 3.0 ms per dataset at default settings, one machine). It is best read as an interpretable, low-false-positive *filter*, not a better detector overall. Full tables with confidence intervals: [evaluation/results_phase2/tables.md](evaluation/results_phase2/tables.md); the earlier development run is in [evaluation/results/](evaluation/results/).
+
+### Research report
+
+[research_report/Yuxi_He_Research_Report.pdf](research_report/Yuxi_He_Research_Report.pdf) is the 4-page report (source: [research_report/mini_research_report.md](research_report/mini_research_report.md)). Every number in it is recomputed from the committed results by `research_report/verify_report_numbers.py`; the review notes are in [research_report/report_review.md](research_report/report_review.md).
+
+### Reproduce
+
+All commands run from the repository root with Python 3.10+ and only the standard library (about 10 minutes for the full held-out run).
+
+```bash
+python -m unittest discover -s tests                       # unit tests, including regeneration checks
+python evaluation/tune_baseline.py                          # tuning seeds only
+python evaluation/run_experiments.py --config evaluation/configs/phase2.json \
+       --tuned evaluation/results_phase2/tuned_parameters.json --out evaluation/results_phase2
+python evaluation/summarize_phase2.py                       # tables, paired comparisons, figures
+python research_report/make_figures.py                      # report Figure 1
+python research_report/verify_report_numbers.py             # every number in the report vs the results
+python research_report/make_pdf.py                          # rebuild the PDF (needs Microsoft Edge)
+```
+
+Metric columns are deterministic; only the runtime columns vary by machine. Details and the Phase 1 commands: [evaluation/README.md](evaluation/README.md).
+
+### Scientific limitations
+
+- **Circularity.** The generator and the detector share an author and a model of coordination, so V1 is tested on the behaviour it was designed for.
+- **No real-world estimate.** Nothing here measures precision or recall on a real platform. A flag is a statistical anomaly, not evidence of intent or of who controls the accounts.
+- **Simplified world.** No follower graphs, daily cycles or adaptive adversaries; jitter does not grow with the gap between posts; factors were varied one at a time at a single dataset size.
+- **Tuning asymmetry.** Only baseline B was tuned, on scenario families shared with the test set (different seeds); a stricter false-positive cap would select other settings.
+- **Statistics.** No multiple-comparison correction, so configuration-level wins and losses are exploratory; the paired intervals are seeded bootstrap intervals, adopted after the normal-approximation intervals proved invalid in 4 of 129 comparisons (documented in the protocol amendment).
+- **Baselines.** B is SynchroTrap-style, not SynchroTrap; there is no graph-based or machine-learning baseline.
+
+Real-data validation against independently corroborated coordination is the main open question.
 
 ## Layout
 
 ```
 coordination_detector/  detector.py (groups, indicators, tiers) · network.py (cohort tracing) · cli.py
 examples/               make_example.py and the generated example_engagement.json
-tests/                  unit and end-to-end tests
+tests/                  unit and end-to-end tests (detector, benchmark, Phase 2, report numbers)
 tools/check_release.py  pre-publication check
+evaluation/             synthetic benchmark: generator, methods, metrics, configs, results, figures
+research_report/        PDF report, Markdown source, figure and PDF scripts, number verifier
+RESEARCH_QUESTIONS.md   research questions and hypotheses
 METHODS.md              methods, limitations, false-positive risks
 ```
 

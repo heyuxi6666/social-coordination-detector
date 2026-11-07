@@ -10,7 +10,7 @@ Every number in the reports is a raw value next to a baseline drawn from the sam
    - the overlap coefficient (shared / smaller set);
    - a hypergeometric tail probability against the population of all accounts seen liking any analysed post, with a Bonferroni correction across all pairs.
 3. **Groups.** Pairs with an overlap coefficient of at least 0.3 and a corrected p ≤ 0.001 are joined into connected groups.
-4. **Indicators per group.** Five indicators are scored. Each is either triggered, not triggered, or not measurable (section 2).
+4. **Indicators per group.** Six indicators are scored. Each is either triggered, not triggered, or not measurable (section 2).
 5. **Tier.** A group's tier is derived from its indicators (section 3).
 6. **Network tracing.** The detector starts from the strongest fixed-offset group, or from `--seed` posts.
    - The cohort is the set of accounts that liked every seed post.

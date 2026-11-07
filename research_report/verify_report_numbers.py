@@ -182,6 +182,32 @@ check(f"Against A, the counts were {ab} / {aw} / {at} and {ob} / {ow} / {ot}")
 rt = lambda m: float(SUMMARY[(H + "coordinated", m)]["runtime_ms_median"])
 check(f"median runtime per dataset was {rt('C_v1'):.1f} ms for V1, {rt('B_tuned'):.1f} ms for tuned B and {rt('A_overlap_only'):.1f} ms for A")
 
+# ---- README results table and claims (same sources as the report)
+README = (ROOT / "README.md").read_text(encoding="utf-8")
+
+
+def check_readme(text: str) -> None:
+    covered.update(re.findall(r"\d+\.\d{2}", text))
+    if text not in README:
+        failures.append(f"text not found in README: {text!r}")
+
+
+a_flags, b_flags, c_flags = (flagged(m)[0] for m in ("A_overlap_only", "B_tuned", "C_v1"))
+check_readme(f"| Organic-only datasets flagged (of {flagged('C_v1')[1]}) | {a_flags} | {b_flags} | {c_flags} |")
+for label, config in (("Independent random delays (range 600 s): account F1", P3 + "600"), ("Participation 0.4: account F1", P4 + "0.4"),
+                      ("Timing jitter sd 40 s: account F1", P8 + "40"), ("Account rotation 0.1: account F1", P5 + "0.1")):
+    check_readme(f"| {label} | {f1(config, 'A_overlap_only')} | {f1(config, 'B_tuned')} | {f1(config, 'C_v1')} |")
+check_readme(f"flagged none of the {flagged('C_v1')[1]} organic-only datasets")
+check_readme(f"({rt('C_v1'):.1f} ms vs {rt('B_tuned'):.1f} ms per dataset at default settings")
+check_readme(f"{INFO['datasets']:,} datasets")
+check_readme(f"held-out seeds {INFO['seeds'][0]}-{INFO['seeds'][-1]} (30 per configuration, {INFO['configurations']} configurations")
+check_readme(f"Tuning seeds {TUNED['tuning_seeds'][0]}-{TUNED['tuning_seeds'][1]}")
+check_readme(f"tuned** setting ({TUNED['parameters']['bucket_seconds']:,} s, groups of {TUNED['parameters']['min_group_accounts']})")
+check_readme(f"invalid in {len(outside)} of {len(PAIRED_ROWS)} comparisons")
+check_readme("research_report/Yuxi_He_Research_Report.pdf")
+if not (HERE / "Yuxi_He_Research_Report.pdf").exists():
+    failures.append("the PDF referenced from the README is missing")
+
 # ---- statements that must be present
 for text in ("Evaluation code available on request.", "**Yuxi He**\nPostgraduate Cyber Security student\nThe University of Queensland",
              "https://github.com/heyuxi6666/social-coordination-detector",

@@ -81,7 +81,7 @@ This meets "approximately 3 A4 pages plus references". Body text is 11 pt. If th
     - running the report verifier.
   - **Project suite:** 340 OK, 1 skipped.
   - **Regeneration:** the existing tests that regenerate summaries byte for byte from the raw CSV still pass after regeneration.
-- **Privacy:** `tools/check_release.py` passes with the private deny-list. The report contains no competition data.
+- **Privacy:** `tools/check_release.py` passes with the private deny-list. The report uses synthetic data only; it contains no real-platform data.
 
 ## 4. Citation check
 
