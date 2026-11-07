@@ -1,14 +1,17 @@
-"""Draw the two report figures from evaluation/results_phase2/summary.csv (held-out seeds only).
+"""Draw the report figure from the committed held-out results (seeds 5000-5029 only).
 
     python research_report/make_figures.py
 
-Reads only the committed summary; draws with the evaluation's own dependency-free SVG plotter.
+Figure 1 (a): share of organic-only datasets flagged, with Wilson 95% intervals (from summary.csv).
+Figure 1 (b): mean per-seed account F1 with 95% percentile-bootstrap intervals computed from raw_results.csv, so every
+interval stays inside [0, 1] (mean ± 1.96 SE would cross 1 for near-perfect methods).
 """
 
 from __future__ import annotations
 
 import csv
 import sys
+import zlib
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -16,39 +19,47 @@ sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "evaluation"))
 
 import summarize_phase2 as p2  # noqa: E402
-from bench import svgplot  # noqa: E402
+from bench import metrics, svgplot  # noqa: E402
 
-SUMMARY = ROOT / "evaluation" / "results_phase2" / "summary.csv"
+RESULTS = ROOT / "evaluation" / "results_phase2"
 OUT = Path(__file__).resolve().parent / "figures"
-FLOATS = {"detect_rate", "detect_lo", "detect_hi", "f1_seed_mean", "f1_seed_se", "null_fp_rate", "null_fp_lo", "null_fp_hi"}
+FLOATS = {"null_fp_rate", "null_fp_lo", "null_fp_hi"}
+BOOT_REPS = 10_000
 
 
-def load() -> list[dict]:
-    with SUMMARY.open(encoding="utf-8", newline="") as handle:
-        return [{k: (float(v) if k in FLOATS and v != "" else v) for k, v in row.items()} for row in csv.DictReader(handle)]
+def read(name: str) -> list[dict]:
+    with (RESULTS / name).open(encoding="utf-8", newline="") as handle:
+        return list(csv.DictReader(handle))
+
+
+def f1_points(raw: list[dict], experiment: str, parameter: str) -> tuple[list[str], dict]:
+    per: dict = {}
+    for r in raw:
+        if r["experiment"] == experiment and r["method"] in p2.COMPARED and r["label"].startswith(parameter + "="):
+            f1 = metrics.f1_from_counts(int(r["tp"]), int(r["fp"]), int(r["fn"]))
+            per.setdefault(r["label"], {}).setdefault(r["method"], []).append(f1)
+    labels = list(per)                                        # raw rows are written in configuration order
+    series = {m: [] for m in p2.COMPARED}
+    for label in labels:
+        for m in p2.COMPARED:
+            values = per[label][m]
+            lo, hi = metrics.bootstrap_mean_ci(values, BOOT_REPS, zlib.crc32(f"{label}|{m}".encode("utf-8")))
+            series[m].append((sum(values) / len(values), lo, hi))
+    return [label.split("=", 1)[1] for label in labels], series
 
 
 def main() -> int:
-    summary = load()
-    f1 = "account F1 (mean, 95% CI)"
-    figures = {
-        "figure1_false_positives_vs_participation.svg": svgplot.two_panel_chart(
-            [p2.panel(summary, "P6_notification_bursts", "loyal_delay_mean", "fp", "(a) Organic data with an audience burst",
-                      "mean reaction delay of the audience (s)", "datasets with any flag (95% CI)"),
-             p2.panel(summary, "P4_participation", "participation", "f1", "(b) Coordinated group, partial participation",
-                      "share of the group acting per post", f1)],
-            p2.LEGEND, "30 held-out seeds per point; synthetic data; categorical x axis; points offset by method. In (a) every flag is a false positive."),
-        "figure2_failure_modes.svg": svgplot.two_panel_chart(
-            [p2.panel(summary, "P3_random_delays", "cohort_spread", "f1", "(a) Independently random delays",
-                      "range of the random delay (s)", f1),
-             p2.panel(summary, "P8_jitter", "jitter", "f1", "(b) Fixed delays with timing jitter",
-                      "jitter, Gaussian sd per like (s)", f1)],
-            p2.LEGEND, "30 held-out seeds per point; synthetic data; categorical x axis; points offset horizontally by method."),
-    }
+    summary = [{k: (float(v) if k in FLOATS and v != "" else v) for k, v in row.items()} for row in read("summary.csv")]
+    labels, series = f1_points(read("raw_results.csv"), "P4_participation", "participation")
+    figure = svgplot.two_panel_chart(
+        [p2.panel(summary, "P6_notification_bursts", "loyal_delay_mean", "fp", "(a) Organic data with an audience burst",
+                  "mean reaction delay of the audience (s)", "datasets with any flag (Wilson 95% CI)"),
+         {"title": "(b) Coordinated group, partial participation", "xlabel": "share of the group acting per post",
+          "ylabel": "account F1 (mean, bootstrap 95% CI)", "x_labels": labels, "series": series}],
+        p2.LEGEND, "30 held-out seeds per point; synthetic data; categorical x axis; points offset by method. In (a) every flag is a false positive.")
     OUT.mkdir(parents=True, exist_ok=True)
-    for name, text in figures.items():
-        (OUT / name).write_bytes(text.encode("utf-8"))
-        print(f"wrote {name}")
+    (OUT / "figure1_false_positives_vs_participation.svg").write_bytes(figure.encode("utf-8"))
+    print("wrote figure1_false_positives_vs_participation.svg")
     return 0
 
 

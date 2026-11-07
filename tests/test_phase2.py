@@ -189,5 +189,48 @@ class ReportedResultsComeFromExecutedExperiments(unittest.TestCase):
         self.assertTrue(all(m == {"A_overlap_only", "B_time_bucket", "B_tuned", "C_v1", "C_v1_strong"} for m in methods_.values()))
 
 
+class IntervalTests(unittest.TestCase):
+    def test_bootstrap_interval_is_deterministic_and_inside_the_observed_range(self):
+        values = [0.0, 0.0, 1.0, 1.0, 1.0, -1.0, 0.5, 1.0, 1.0, 1.0]
+        lo, hi = metrics.bootstrap_mean_ci(values, reps=2000, seed=7)
+        self.assertEqual((lo, hi), metrics.bootstrap_mean_ci(values, reps=2000, seed=7))
+        self.assertTrue(min(values) <= lo <= sum(values) / len(values) <= hi <= max(values))
+
+    def test_bootstrap_interval_of_constant_values_is_that_value(self):
+        self.assertEqual(metrics.bootstrap_mean_ci([-1.0] * 30), (-1.0, -1.0))
+
+    def test_normal_interval_can_leave_the_valid_range_and_bootstrap_cannot(self):
+        diffs = [-1.0] * 29 + [0.0]                                   # one seed differs: the case seen in the results
+        mean, se = metrics.mean_se(diffs)
+        self.assertLess(mean - 1.96 * se, -1.0)
+        self.assertGreaterEqual(metrics.bootstrap_mean_ci(diffs)[0], -1.0)
+
+    def test_committed_paired_intervals(self):
+        with (RESULTS / "paired_comparisons.csv").open(newline="", encoding="utf-8") as handle:
+            rows = list(csv.DictReader(handle))
+        self.assertEqual(len(rows), 129)
+        self.assertTrue(all(-1 <= float(r["boot_low"]) <= float(r["mean_difference"]) + 1e-9 for r in rows))
+        self.assertTrue(all(float(r["mean_difference"]) - 1e-9 <= float(r["boot_high"]) <= 1 for r in rows))
+        coordinated = {r["kind"] for r in rows}
+        self.assertEqual(coordinated, {"coordinated", "organic-only"})
+        for r in rows:
+            self.assertEqual(r["verdict_bootstrap"], p2.verdict(float(r["boot_low"]), float(r["boot_high"]), r["kind"] == "coordinated"))
+        self.assertEqual(sum(1 for r in rows if float(r["ci_low"]) < -1 or float(r["ci_high"]) > 1), 4)   # documented in the report
+
+    def test_scoreboard_never_mixes_f1_and_false_positive_comparisons(self):
+        tables = (RESULTS / "tables.md").read_text(encoding="utf-8")
+        self.assertIn("| Experiment | Kind | Baseline |", tables)
+        self.assertIn("| **all** | coordinated | B tuned |", tables)
+        self.assertIn("| **all** | organic-only | B tuned |", tables)
+
+
+class ReportTests(unittest.TestCase):
+    def test_every_number_in_the_report_matches_the_committed_results(self):
+        import subprocess
+        script = ROOT / "research_report" / "verify_report_numbers.py"
+        result = subprocess.run([sys.executable, "-B", str(script)], capture_output=True, text=True, encoding="utf-8")
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+
 if __name__ == "__main__":
     unittest.main()

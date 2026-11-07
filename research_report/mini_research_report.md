@@ -1,47 +1,55 @@
 # Evaluating Temporal Coordination Detection: False-Positive Control and Robustness under Synthetic Engagement Behaviour
 
-*[Author name]* · Master of Cyber Security (in progress), The University of Queensland · November 2026
-Code: `social-coordination-detector` (MIT licence); evaluation on branch `research-evaluation`.
+**Yuxi He** · Postgraduate Cyber Security student, The University of Queensland · November 2026
+Detector V1: `social-coordination-detector` (MIT licence). Evaluation code available on request.
 
 ## Abstract
 
-Coordinated inauthentic engagement is commonly detected by finding accounts that act together in time. Legitimate audiences, such as followers reacting to a notification, also act together. We evaluate V1, an interpretable non-machine-learning detector that flags a group only when the same accounts repeat a personal, fixed delay across posts, checked with a seeded permutation test. V1 is compared with an engagement-overlap baseline and a SynchroTrap-style time-bucket baseline, the latter tuned on separate seeds. On a synthetic benchmark of 1,290 held-out datasets (43 configurations × 30 seeds), V1 flagged none of 390 organic-only datasets. The tuned time-bucket baseline flagged every dataset that contained an audience reacting with a mean delay of 120 s or less. V1 was clearly worse in three conditions: when coordinated accounts randomised their delays (F1 ≤ 0.04 vs 1.00), at 40% participation (0.00 vs 0.43), and under 40 s of timing jitter (0.42 vs 1.00). These results describe a false-positive/recall trade-off within one synthetic world model, not real-world accuracy.
+Coordinated inauthentic engagement is often detected through synchrony, yet legitimate audiences also react together. We evaluate V1, an interpretable non-machine-learning detector that flags accounts only when they repeat a personal, fixed like delay across posts. We compare it with an engagement-overlap baseline and a SynchroTrap-style time-bucket baseline tuned on separate seeds. On 1,290 held-out datasets (43 configurations × 30 seeds) of a synthetic benchmark, V1 flagged none of 390 organic-only datasets. The tuned baseline, by contrast, flagged every dataset containing an audience that reacted with a mean delay of 120 s or less. V1 was clearly worse when coordinated accounts randomised their delays (F1 ≤ 0.04 vs 1.00), at 40% participation (0.00 vs 0.43) and under 40 s of timing jitter (0.42 vs 1.00). The results characterise a trade-off within a synthetic model; they do not measure real-world accuracy.
 
 ## 1. Introduction and research questions
 
-Synchrony, meaning accounts acting on the same objects at nearly the same time, is a central signal for coordinated behaviour [1–3]. It also describes ordinary audiences, and false positives penalise legitimate communities. V1 therefore tests a narrower regularity: whether the *same accounts repeat their own fixed delay* from post to post. Scripted accounts can produce this pattern; independent human reactions are not expected to. V1 reports statistical anomalies with their baselines, never verdicts.
-
-We ask: **RQ1** – does timing-based detection outperform engagement-overlap-only detection, especially on false positives? **RQ2** – how robust is it to jitter, partial participation, wide or randomised delays and heavy-user activity? **RQ3** – how does account rotation affect detection and cohort tracing?
-
-**Contribution.** Lockstep and synchronised-action detection are established [1–3], so the contribution is an evaluation, not a new principle: (i) an open, dependency-free fixed-offset permutation test with explicit false-positive controls; (ii) a reproducible synthetic benchmark with disjoint tuning and held-out seeds; and (iii) an honest map of where the design helps and where it fails.
+Synchrony is a central signal for coordinated behaviour [1–3], but ordinary audiences are synchronised too. V1 therefore tests a narrower regularity: whether the *same accounts repeat their own fixed delay* from post to post. It reports statistical anomalies, never verdicts about intent. **RQ1:** does timing-based detection outperform overlap-only detection, especially on false positives? **RQ2:** how robust is it to jitter, partial participation, wide or randomised delays and heavy users? **RQ3:** how does account rotation affect it? The contribution is an evaluation, not a new principle. It has three parts: an open fixed-offset permutation test, a reproducible benchmark with disjoint tuning and held-out seeds, and a documented account of where the design helps and where it fails.
 
 ## 2. Related work
 
-CopyCatch [1] found Facebook users who liked the same pages within the same time windows ("lockstep" behaviour). SynchroTrap [2] clustered accounts with loosely synchronised actions at the scale of large social networks. CatchSync [3] detects synchronised behaviour in directed graphs, and FRAUDAR [4] finds dense subgraphs despite camouflage. Pacheco et al. [5] build coordination networks from shared behavioural traces, and Giglietto et al. [6] define coordinated link sharing as the same URL shared within a short window. Cresci et al. [7] showed that newer spambots evade older detectors; Ferrara et al. [8] survey social bots, and supervised graph-based detection uses benchmarks such as TwiBot-22 [9]. We instead study one interpretable test and its false positives on legitimate synchronised audiences.
+CopyCatch [1] detects lockstep Page-Like behaviour on Facebook from the user–Page graph and like timestamps alone. SynchroTrap [2] clusters accounts whose actions on the same object, such as an IP address or a target page, fall within a matching window. It uses Jaccard similarity and connected components, and was deployed in five applications at Facebook and Instagram. Related graph methods find synchronised or dense suspicious structure [3, 4]. Pacheco et al. [5] build coordination networks from shared behavioural traces without supervision, and Giglietto et al. [6] define coordinated link sharing through a short time window. Newer spambots evade older detectors [7, 8], and supervised graph-based detection uses benchmarks such as TwiBot-22 [9].
 
 ## 3. Methods
 
-Each method receives, for every post, its likers and their like times.
+**Table 1.** Signals used by each method (✓ = used, – = not used).
 
-**A. Overlap-only** is V1's own group-forming step without timing. Post pairs are linked when the liker-overlap coefficient is at least 0.3 and the Bonferroni-corrected hypergeometric p ≤ 10⁻³, and accounts that liked at least half of a group's posts are flagged.
+| Signal | A overlap-only | B time-bucket | C V1 |
+|---|---|---|---|
+| Who liked which post | ✓ | ✓ | ✓ |
+| Like timestamps | – | ✓ absolute, bucketed | ✓ per-account delay between posts |
+| Post author ids | – | – | ✓ same-author yardstick |
+| Account-id numbering (metadata) | – | – | ✓ id-adjacency indicator |
+| Like and repost counts | – | – | ✓ repost-to-like indicator, if supplied |
 
-**B. Time-bucket co-action** is SynchroTrap-inspired but does not reimplement [2]. Each like becomes an item (post, ⌊time/w⌋). Accounts sharing at least 3 items with item Jaccard ≥ 0.5 are linked, and components of at least *m* accounts are flagged. The original setting is w = 300 s, m = 5; the tuned setting is described in Section 4.
+**A. Overlap-only** is V1's own group-forming step. It links two posts when their liker-overlap coefficient is at least 0.3 and the Bonferroni-corrected hypergeometric p ≤ 10⁻³, then flags accounts that liked at least half of a group's posts.
 
-**C. V1.** Groups are formed as in A. For each post pair, V1 finds the largest *cohort* of shared likers whose delay differences between the two posts fit in a 20 s window. It tests that cohort against 500 seeded permutations of second-post times, with p = (b+1)/(m+1) [10]. A cohort is *fixed-offset* when p ≤ 0.01, it has at least 10 accounts, its typical delay difference is at least 120 s (which excludes single browsing sessions), and its like times span at least max(60 s, 5 × its range of delay differences), which excludes single bursts. Groups rated *strong* or *moderate* are flagged, a rule fixed before the main experiments, and the flagged accounts are the fixed-offset cohort. V1's code was not modified.
+**B. Time-bucket co-action** is a simplified SynchroTrap-style baseline, not a reimplementation of [2]. It turns each like into an item (post, ⌊time/*w*⌋) and links accounts that share at least 3 items with item Jaccard ≥ 0.5. Connected components of at least *n*_min accounts are flagged (originally *w* = 300 s, *n*_min = 5). Unlike SynchroTrap's matching window, fixed buckets can split near-simultaneous likes.
+
+**C. V1** forms groups as in A and scores them on six indicators: three overlap-based, one timing (the fixed-offset cohort), one account-metadata (consecutive ids) and one count-based (the repost-to-like ratio). For posts *a* and *b* and each shared liker *i*, let *d_i* = *t_i*(*b*) − *t_i*(*a*), and let *c*_obs be the size of the largest set of shared likers whose *d_i* fit in a 20 s window. Over *R* = 500 seeded re-pairings of second-post times, *p* = (1 + #{*r* : *c_r* ≥ *c*_obs}) / (*R* + 1) [10]. A cohort is *fixed-offset* if four conditions hold: *p* ≤ 0.01; *c*_obs ≥ 10; the window centre is at least 120 s, so it is not a single browsing session; and its like times on *a* span at least max(60 s, 5 × the range of its *d_i*), so it is not a single burst.
+
+A group is rated *strong* if at least 3 indicators are measurable and all of them trigger, except single-author groups that lack both timing and same-author support. It is rated *weak* if timing is measurable but finds no fixed-offset cohort, and otherwise *moderate* if at least 2 indicators trigger. Under a rule fixed before the main experiments, strong and moderate groups are flagged, and their fixed-offset cohorts are the flagged accounts. V1's code was not modified.
 
 ## 4. Experimental setup
 
-**Synthetic world.** Each dataset has 2,000 accounts and 30 posts over 48 hours. Each post has about 40 organic likers (±30%) with exponential delays (mean 2,400 s); ten per cent of accounts are heavy users with five times the selection weight. In coordinated datasets, a group of 40 accounts likes 6 posts by 3 authors, and each member reuses a personal delay (spread over 120 s) with Gaussian jitter (sd 2 s). The varied factors are jitter, participation (the per-post probability that a member acts), rotation (the per-post probability that a member is replaced), cohort spread, and a *random-delay* mode that redraws every delay. The negatives are organic-only data, 35 followers liking one author's 3 posts with a mean delay from 15 s (a burst) to 1,800 s (a loyal audience), and heavy-user weights up to 50.
+**Synthetic world.** Each dataset has 2,000 accounts and 30 posts over 48 h. Posts receive about 40 organic likers (±30%) with exponential delays (mean 2,400 s), and 10% of accounts are heavy users with five times the selection weight. In coordinated datasets, 40 accounts like 6 posts by 3 authors. Each account reuses a personal delay (spread over 120 s) with Gaussian jitter (sd 2 s). By default the generator supplies no repost counts and gives group accounts random ids. We vary jitter, participation, rotation, cohort spread, and a *random-delay* mode that redraws every delay. The negative scenarios are organic-only data; 35 followers liking one author's 3 posts, with a mean delay from 15 s (a burst) to 1,800 s (a loyal audience); and heavy-user weights up to 50.
 
-**Splits.** Tuning seeds 2000–2019 were used only to tune B, over 42 cells (w = 60–3,600 s, m = 3–20) and 11 scenarios (7 coordinated, 4 negative). The objective, mean F1 minus mean false-positive rate, selected **w = 2,400 s, m = 15** (score 0.691, against 0.677 for the original setting). All reported results use held-out seeds 5000–5029. Neither A nor V1 was tuned, and the protocol was fixed before tuning.
+**Splits and tuning.** Seeds 2000–2019 were used only to tune B, over 42 cells (*w* = 60–3,600 s, *n*_min = 3–20) and 11 scenarios (7 coordinated, 4 negative). Maximising mean F1 minus mean false-positive rate selected **w = 2,400 s, n_min = 15**; its tuning score was 0.691, against 0.677 for the original setting. All results use held-out seeds 5000–5029. A and V1 were not tuned, and the protocol was fixed before tuning.
 
-**Metrics.** We report account F1 (mean per seed ± SE) and group detection, where a flagged group must match the true posts with Jaccard ≥ 0.5. The false-positive rate is the share of organic-only datasets with any flag, with Wilson 95% intervals [11]. Paired per-seed differences carry 95% intervals, and a win or loss is claimed only when the interval excludes zero.
+**Metrics.** We report mean per-seed account F1, where group detection requires post-set Jaccard ≥ 0.5, and false-positive rates with Wilson intervals [11]. Paired per-seed differences compare coordinated configurations on F1 and organic-only ones on the false-positive indicator; the two are never combined.
+
+**Intervals.** The pre-registered paired intervals (mean ± 1.96 SE) fell outside [−1, 1] in 4 of 129 comparisons (lowest −1.032). We therefore report seeded percentile-bootstrap intervals (10,000 resamples) [12]; the verdicts are unchanged except in one negligible comparison. All configuration-level wins and losses are exploratory, because no multiple-comparison correction was applied.
 
 ## 5. Results and discussion
 
-**RQ1: false positives.** V1 flagged **none of 390 organic-only held-out datasets** (Wilson upper bound 0.010). On plain organic and heavy-user data (150 datasets) every method was nearly clean, and A flagged 2. On follower-audience data (240 datasets), A flagged 240, original B 142, tuned B 167, and V1 none. Both B variants flag every audience reacting with a mean delay of 120 s or less (Fig. 1a). Tuning moved B's false-positive region towards slower audiences without removing it: tuned B flagged 0.97 of datasets at 300 s and 0.53 at 900 s. On easy coordinated data, A, both B variants and V1 detected the group in all 30 datasets. When a loyal audience was added next to the group, A absorbed it (F1 0.68).
+**RQ1: false positives.** V1 flagged **none of 390 organic-only held-out datasets** (Wilson upper bound 0.010). On plain organic and heavy-user data (150 datasets), every method was nearly clean, and A flagged 2. On follower-audience data (240 datasets), A flagged 240, original B 142, tuned B 167, and V1 none. Both B variants flagged every audience with a mean delay of 120 s or less (Fig. 1a). Tuning shifted their false-positive region rather than removing it: tuned B flagged 0.97 of datasets at 300 s and 0.53 at 900 s. All four detectors found the plain coordinated group in all 30 datasets, but A absorbed an adjacent loyal audience (F1 0.68). V1's *strong* tier never fired on default data (0 of 30 datasets), because the repost indicator was unmeasurable and the id-adjacency indicator did not trigger. In a diagnostic scenario that plants consecutive ids and inflated repost counts, which are exactly what those indicators measure, the *strong* tier fired in 30 of 30 diagnostic datasets. The flagging rule therefore includes *moderate*.
 
-**Table 1.** Default settings, 30 held-out seeds. The first three rows give account F1; the last three give the share of organic-only datasets flagged, with Wilson 95% intervals.
+**Table 2.** Default settings, 30 held-out seeds. The first three rows give mean account F1; the last three give the share of organic-only datasets flagged, with Wilson 95% intervals.
 
 | Scenario | A overlap | B original | B tuned | C V1 |
 |---|---|---|---|---|
@@ -52,40 +60,37 @@ Each method receives, for every post, its likers and their like times.
 | Loyal audience (mean delay 1,800 s) | 1.00 [0.89, 1.00] | 0.00 [0.00, 0.11] | 0.03 [0.01, 0.17] | 0.00 [0.00, 0.11] |
 | Notification burst (mean delay 45 s) | 1.00 [0.89, 1.00] | 1.00 [0.89, 1.00] | 1.00 [0.89, 1.00] | 0.00 [0.00, 0.11] |
 
-V1's *strong* tier fired only when two side signals were also present (consecutive account ids and inflated reposts), in 30 of 30 such datasets. The tier measures agreement between indicators, not timing strength, which is why the flagging rule includes *moderate*.
-
 ![Figure 1](figures/figure1_false_positives_vs_participation.png)
-**Figure 1.** (a) Share of organic-only datasets flagged, by the mean reaction delay of a 35-account audience; every flag is a false positive. (b) Account F1 under partial participation. Means with 95% intervals; 30 held-out seeds per point.
+**Figure 1.** (a) Share of organic-only datasets flagged, by the mean reaction delay of a 35-account audience (Wilson 95% intervals); every flag is a false positive. (b) Mean account F1 under partial participation (percentile-bootstrap 95% intervals). 30 held-out seeds per point.
 
-**RQ2: robustness.** V1 held at 1.00 up to a 2,000 s cohort spread. At that spread the original B fell to 0.91, and tuned B (0.99) was indistinguishable from V1. V1 lost clearly in three conditions (Table 2). With *randomised delays* (Fig. 2a) its F1 was at most 0.04. This is inherent to the design: the group still overlaps, so A and tuned B found it. Under *partial participation* (Fig. 1b) it scored 0.78 against 0.89 at 0.6, and 0.00 against 0.43 at 0.4, where the overlap step V1 shares with A no longer forms a group. Under *jitter* (Fig. 2b) it scored 0.99 at 20 s, 0.42 at 40 s and 0.13 at 80 s, against 1.00 for B, a direct consequence of its fixed 20 s window. Heavy users lowered A's F1 to 0.85 at weight 50, but barely affected B or V1.
+**RQ2: robustness.** V1 held at 1.00 up to a 2,000 s cohort spread. At that spread the original B fell to 0.91, while tuned B (0.99) was indistinguishable from V1 (Table 3). V1 lost clearly in three conditions. With randomised delays, F1 ≤ 0.04. This follows from its design; A and tuned B still found the overlapping group. With participation at 0.4, the overlap step V1 shares with A no longer forms a group (Fig. 1b). Under jitter, V1 scored F1 0.99 at 20 s, then 0.42 at 40 s and 0.13 at 80 s, reflecting its fixed 20 s window. Heavy users reduced A's F1 to 0.85 at weight 50 but barely affected B or V1.
 
-**Table 2.** Account F1 (mean ± SE, 30 held-out seeds) and the paired difference V1 − tuned B (95% CI).
+**Table 3.** Mean account F1 (30 held-out seeds) and the paired difference V1 − tuned B, with a percentile-bootstrap 95% interval. The standard errors of all F1 means shown are at most 0.07.
 
 | Setting | A | B original | B tuned | C V1 | V1 − B tuned |
 |---|---|---|---|---|---|
-| Cohort spread 2,000 s | 0.98 ± 0.00 | 0.91 ± 0.01 | 0.99 ± 0.01 | 1.00 ± 0.00 | +0.01 [−0.01, +0.02] |
-| Random delays, range 600 s | 0.98 ± 0.00 | 1.00 ± 0.00 | 1.00 ± 0.00 | 0.00 ± 0.00 | −1.00 [−1.00, −1.00] |
-| Participation 0.6 | 0.72 ± 0.05 | 0.88 ± 0.01 | 0.89 ± 0.01 | 0.78 ± 0.05 | −0.11 [−0.20, −0.01] |
-| Participation 0.4 | 0.00 ± 0.00 | 0.51 ± 0.03 | 0.43 ± 0.06 | 0.00 ± 0.00 | −0.43 [−0.55, −0.32] |
-| Jitter sd 40 s | 0.98 ± 0.00 | 1.00 ± 0.00 | 1.00 ± 0.00 | 0.42 ± 0.07 | −0.58 [−0.71, −0.46] |
-| Rotation 0.1 | 0.82 ± 0.01 | 0.83 ± 0.01 | 0.83 ± 0.01 | 0.91 ± 0.01 | +0.08 [+0.07, +0.09] |
-| Rotation 0.4 | 0.52 ± 0.02 | 0.41 ± 0.01 | 0.42 ± 0.01 | 0.30 ± 0.05 | −0.11 [−0.23, −0.00] |
-| Rotation 0.6 | 0.06 ± 0.02 | 0.18 ± 0.01 | 0.16 ± 0.02 | 0.06 ± 0.02 | −0.10 [−0.15, −0.04] |
+| Cohort spread 2,000 s | 0.98 | 0.91 | 0.99 | 1.00 | +0.01 [−0.00, +0.02] |
+| Random delays, range 120 s | 0.98 | 1.00 | 1.00 | 0.04 | −0.96 [−1.00, −0.90] |
+| Random delays, range 2,000 s | 0.98 | 0.01 | 1.00 | 0.00 | −1.00 [−1.00, −1.00] |
+| Participation 0.6 | 0.72 | 0.88 | 0.89 | 0.78 | −0.11 [−0.21, −0.02] |
+| Participation 0.4 | 0.00 | 0.51 | 0.43 | 0.00 | −0.43 [−0.54, −0.32] |
+| Jitter sd 40 s | 0.98 | 1.00 | 1.00 | 0.42 | −0.58 [−0.71, −0.46] |
+| Jitter sd 80 s | 0.98 | 1.00 | 1.00 | 0.13 | −0.87 [−0.95, −0.78] |
+| Rotation 0.1 | 0.82 | 0.83 | 0.83 | 0.91 | +0.08 [+0.07, +0.09] |
+| Rotation 0.4 | 0.52 | 0.41 | 0.42 | 0.30 | −0.11 [−0.22, −0.01] |
+| Rotation 0.6 | 0.06 | 0.18 | 0.16 | 0.06 | −0.10 [−0.15, −0.04] |
 
-![Figure 2](figures/figure2_failure_modes.png)
-**Figure 2.** Account F1 when coordinated accounts (a) redraw their delay for every post and (b) keep a fixed delay with Gaussian jitter. Means with 95% intervals; 30 held-out seeds per point.
+**RQ3: rotation.** V1 led only at rotation 0.1 (0.91 vs 0.83). A possible but untested explanation is that V1 combines cohorts from individual post pairs, whereas B needs three shared items. From rotation 0.4 V1 trailed B and returned fragments of the group (0.57 per dataset, against 0 for B). Its tracer recovered 87% of coordinated posts at rotation 0.2, 33% at 0.4 and 0% at 0.8.
 
-**RQ3: rotation.** V1 led at rotation 0.1 (0.91 vs 0.83). One explanation, consistent with the method definitions but not tested directly: V1 combines cohorts from individual post pairs, so it can flag a rotated-in account seen on only two posts, which B, needing three shared items, cannot. From rotation 0.4 onward V1 trailed B and returned group fragments (0.57 per dataset, against 0 for B). V1's tracer follows accounts that liked every seed post. It recovered 87% of coordinated posts at rotation 0.2, 33% at 0.4 and 0% at 0.8, so membership-based cohorts do not survive turnover.
-
-**Overall.** Across the 43 configurations, V1 beat tuned B in 7 (six audience settings and light rotation), lost in 12 and tied in 24. Against A it won 28, lost 6 and tied 9. At default settings the median runtime per dataset was 176.5 ms for V1, 3.0 ms for tuned B and 0.7 ms for A on one machine. V1's per-configuration medians ranged from 22 to 354 ms. These counts are descriptive: there is no multiple-comparison correction, and some differences are about 0.01. The supported claim is narrow. In this model, requiring repeated per-account delays buys near-complete rejection of legitimate synchronised audiences, at a large recall cost whenever coordinated accounts do not repeat their delays.
+**Exploratory summary.** Against tuned B, V1 was better in 1, worse in 12 and not distinguishable in 17 of the 30 coordinated configurations (compared on F1). On the 13 organic-only configurations (compared on false positives) it had fewer false positives in 6, more in 0 and no clear difference in 7. Against A, the counts were 20 / 6 / 4 and 8 / 0 / 5. At default settings the median runtime per dataset was 176.5 ms for V1, 3.0 ms for tuned B and 0.7 ms for A, on one machine.
 
 ## 6. Limitations and future work
 
-The generator and V1 share an author and a model of coordination, so V1 is tested on the behaviour it was designed for. Nothing here estimates real-world precision or recall, and a flag is a statistical anomaly, not evidence of malicious intent or of who controls the accounts. The synthetic world has no follower graphs, daily cycles or adaptive adversaries; jitter does not grow with the time between posts, and each experiment varies one factor at a single dataset size. Only B was tuned, on scenario families shared with the test set (though on different seeds), and an objective with a hard false-positive cap would select other settings. The paired intervals use a normal approximation, and there is no multiple-comparison correction. Future work comprises validation on real data against independently corroborated coordination, gap-dependent jitter and adaptive adversaries, false-discovery-rate control [12], and a two-stage design in which B proposes groups and V1 filters them.
+The generator and V1 share an author and a model of coordination, so V1 is tested on the behaviour it was designed for. Nothing here estimates real-world precision or recall, and a flag is a statistical anomaly, not evidence of intent or of who controls the accounts. The synthetic world lacks follower graphs, daily cycles and adaptive adversaries; jitter does not grow with the gap between posts; and factors were varied one at a time at one dataset size. Only B was tuned, on scenario families shared with the test set (though on different seeds), and bootstrap intervals from 30 seeds can under-cover slightly. Future work includes real-data validation, adaptive adversaries, false-discovery-rate control [13], and a two-stage design in which B proposes groups and V1 filters them.
 
 ## 7. Conclusion
 
-Under disjoint tuning and held-out seeds, a fixed-offset permutation test rejected legitimate synchronised audiences that overlap and time-bucket baselines flagged, and it flagged none of 390 organic-only datasets. The same design missed coordinated accounts that randomise their delays, and was less robust than a tuned time-bucket baseline to partial participation, large jitter and rotation. V1 is best viewed as an interpretable low-false-positive *filter*, not a better detector overall. Its behaviour on real platform data is untested.
+In this synthetic model, requiring repeated per-account delays bought near-complete rejection of legitimate synchronised audiences: V1 flagged none of 390 organic-only datasets. The price was lower recall when coordinated accounts randomised their delays, acted on only part of the posts, jittered by 40 s or more, or rotated. V1 is best viewed as an interpretable, low-false-positive *filter*, not a better detector overall, and its behaviour on real platform data is untested.
 
 ## References
 
@@ -111,4 +116,6 @@ Under disjoint tuning and held-out seeds, a fixed-offset permutation test reject
 
 [11] E. B. Wilson. Probable inference, the law of succession, and statistical inference. *Journal of the American Statistical Association*, 22(158), 1927, pp. 209–212. doi:10.1080/01621459.1927.10502953
 
-[12] Y. Benjamini, Y. Hochberg. Controlling the false discovery rate: A practical and powerful approach to multiple testing. *Journal of the Royal Statistical Society: Series B*, 57(1), 1995, pp. 289–300. doi:10.1111/j.2517-6161.1995.tb02031.x
+[12] B. Efron. Bootstrap methods: Another look at the jackknife. *The Annals of Statistics*, 7(1), 1979, pp. 1–26. doi:10.1214/aos/1176344552
+
+[13] Y. Benjamini, Y. Hochberg. Controlling the false discovery rate: A practical and powerful approach to multiple testing. *Journal of the Royal Statistical Society: Series B*, 57(1), 1995, pp. 289–300. doi:10.1111/j.2517-6161.1995.tb02031.x

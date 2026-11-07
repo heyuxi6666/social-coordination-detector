@@ -1,130 +1,130 @@
-experiment,config_id,label,kind,baseline,n_seeds,metric,mean_difference,ci_low,ci_high,verdict
-P1_headline,P1_headline|coordinated,coordinated,coordinated,A_overlap_only,30,account F1 (C minus baseline),0.0158,0.0110,0.0206,C better
-P1_headline,P1_headline|coordinated,coordinated,coordinated,B_time_bucket,30,account F1 (C minus baseline),-0.0012,-0.0026,0.0001,no clear difference
-P1_headline,P1_headline|coordinated,coordinated,coordinated,B_tuned,30,account F1 (C minus baseline),-0.0012,-0.0026,0.0001,no clear difference
-P1_headline,"P1_headline|coordinated, adjacent ids + repost signal","coordinated, adjacent ids + repost signal",coordinated,A_overlap_only,30,account F1 (C minus baseline),0.0098,0.0063,0.0133,C better
-P1_headline,"P1_headline|coordinated, adjacent ids + repost signal","coordinated, adjacent ids + repost signal",coordinated,B_time_bucket,30,account F1 (C minus baseline),-0.0012,-0.0026,0.0001,no clear difference
-P1_headline,"P1_headline|coordinated, adjacent ids + repost signal","coordinated, adjacent ids + repost signal",coordinated,B_tuned,30,account F1 (C minus baseline),-0.0012,-0.0026,0.0001,no clear difference
-P1_headline,P1_headline|organic-only,organic-only,organic-only,A_overlap_only,30,any flagged group (C minus baseline),0.0000,0.0000,0.0000,no clear difference
-P1_headline,P1_headline|organic-only,organic-only,organic-only,B_time_bucket,30,any flagged group (C minus baseline),0.0000,0.0000,0.0000,no clear difference
-P1_headline,P1_headline|organic-only,organic-only,organic-only,B_tuned,30,any flagged group (C minus baseline),0.0000,0.0000,0.0000,no clear difference
-P1_headline,P1_headline|organic + loyal followers,organic + loyal followers,organic-only,A_overlap_only,30,any flagged group (C minus baseline),-1.0000,-1.0000,-1.0000,C better
-P1_headline,P1_headline|organic + loyal followers,organic + loyal followers,organic-only,B_time_bucket,30,any flagged group (C minus baseline),0.0000,0.0000,0.0000,no clear difference
-P1_headline,P1_headline|organic + loyal followers,organic + loyal followers,organic-only,B_tuned,30,any flagged group (C minus baseline),-0.0333,-0.0987,0.0320,no clear difference
-P1_headline,P1_headline|organic + notification burst,organic + notification burst,organic-only,A_overlap_only,30,any flagged group (C minus baseline),-1.0000,-1.0000,-1.0000,C better
-P1_headline,P1_headline|organic + notification burst,organic + notification burst,organic-only,B_time_bucket,30,any flagged group (C minus baseline),-1.0000,-1.0000,-1.0000,C better
-P1_headline,P1_headline|organic + notification burst,organic + notification burst,organic-only,B_tuned,30,any flagged group (C minus baseline),-1.0000,-1.0000,-1.0000,C better
-P1_headline,P1_headline|coordinated + loyal followers,coordinated + loyal followers,coordinated,A_overlap_only,30,account F1 (C minus baseline),0.3143,0.3110,0.3176,C better
-P1_headline,P1_headline|coordinated + loyal followers,coordinated + loyal followers,coordinated,B_time_bucket,30,account F1 (C minus baseline),-0.0008,-0.0019,0.0003,no clear difference
-P1_headline,P1_headline|coordinated + loyal followers,coordinated + loyal followers,coordinated,B_tuned,30,account F1 (C minus baseline),-0.0008,-0.0019,0.0003,no clear difference
-P2_cohort_spread,P2_cohort_spread|cohort_spread=120,cohort_spread=120,coordinated,A_overlap_only,30,account F1 (C minus baseline),0.0158,0.0110,0.0206,C better
-P2_cohort_spread,P2_cohort_spread|cohort_spread=120,cohort_spread=120,coordinated,B_time_bucket,30,account F1 (C minus baseline),-0.0012,-0.0026,0.0001,no clear difference
-P2_cohort_spread,P2_cohort_spread|cohort_spread=120,cohort_spread=120,coordinated,B_tuned,30,account F1 (C minus baseline),-0.0012,-0.0026,0.0001,no clear difference
-P2_cohort_spread,P2_cohort_spread|cohort_spread=300,cohort_spread=300,coordinated,A_overlap_only,30,account F1 (C minus baseline),0.0158,0.0110,0.0206,C better
-P2_cohort_spread,P2_cohort_spread|cohort_spread=300,cohort_spread=300,coordinated,B_time_bucket,30,account F1 (C minus baseline),-0.0012,-0.0026,0.0001,no clear difference
-P2_cohort_spread,P2_cohort_spread|cohort_spread=300,cohort_spread=300,coordinated,B_tuned,30,account F1 (C minus baseline),-0.0012,-0.0026,0.0001,no clear difference
-P2_cohort_spread,P2_cohort_spread|cohort_spread=600,cohort_spread=600,coordinated,A_overlap_only,30,account F1 (C minus baseline),0.0158,0.0110,0.0206,C better
-P2_cohort_spread,P2_cohort_spread|cohort_spread=600,cohort_spread=600,coordinated,B_time_bucket,30,account F1 (C minus baseline),0.0023,-0.0022,0.0068,no clear difference
-P2_cohort_spread,P2_cohort_spread|cohort_spread=600,cohort_spread=600,coordinated,B_tuned,30,account F1 (C minus baseline),-0.0008,-0.0024,0.0008,no clear difference
-P2_cohort_spread,P2_cohort_spread|cohort_spread=1000,cohort_spread=1000,coordinated,A_overlap_only,30,account F1 (C minus baseline),0.0158,0.0110,0.0206,C better
-P2_cohort_spread,P2_cohort_spread|cohort_spread=1000,cohort_spread=1000,coordinated,B_time_bucket,30,account F1 (C minus baseline),0.0053,-0.0000,0.0105,no clear difference
-P2_cohort_spread,P2_cohort_spread|cohort_spread=1000,cohort_spread=1000,coordinated,B_tuned,30,account F1 (C minus baseline),0.0000,-0.0020,0.0020,no clear difference
-P2_cohort_spread,P2_cohort_spread|cohort_spread=2000,cohort_spread=2000,coordinated,A_overlap_only,30,account F1 (C minus baseline),0.0158,0.0110,0.0206,C better
-P2_cohort_spread,P2_cohort_spread|cohort_spread=2000,cohort_spread=2000,coordinated,B_time_bucket,30,account F1 (C minus baseline),0.0848,0.0582,0.1115,C better
-P2_cohort_spread,P2_cohort_spread|cohort_spread=2000,cohort_spread=2000,coordinated,B_tuned,30,account F1 (C minus baseline),0.0083,-0.0054,0.0220,no clear difference
-P3_random_delays,P3_random_delays|cohort_spread=120,cohort_spread=120,coordinated,A_overlap_only,30,account F1 (C minus baseline),-0.9407,-0.9922,-0.8892,C worse
-P3_random_delays,P3_random_delays|cohort_spread=120,cohort_spread=120,coordinated,B_time_bucket,30,account F1 (C minus baseline),-0.9620,-1.0140,-0.9101,C worse
-P3_random_delays,P3_random_delays|cohort_spread=120,cohort_spread=120,coordinated,B_tuned,30,account F1 (C minus baseline),-0.9620,-1.0140,-0.9101,C worse
-P3_random_delays,P3_random_delays|cohort_spread=600,cohort_spread=600,coordinated,A_overlap_only,30,account F1 (C minus baseline),-0.9787,-0.9847,-0.9726,C worse
-P3_random_delays,P3_random_delays|cohort_spread=600,cohort_spread=600,coordinated,B_time_bucket,30,account F1 (C minus baseline),-0.9966,-0.9993,-0.9939,C worse
-P3_random_delays,P3_random_delays|cohort_spread=600,cohort_spread=600,coordinated,B_tuned,30,account F1 (C minus baseline),-1.0000,-1.0000,-1.0000,C worse
-P3_random_delays,P3_random_delays|cohort_spread=2000,cohort_spread=2000,coordinated,A_overlap_only,30,account F1 (C minus baseline),-0.9787,-0.9847,-0.9726,C worse
-P3_random_delays,P3_random_delays|cohort_spread=2000,cohort_spread=2000,coordinated,B_time_bucket,30,account F1 (C minus baseline),-0.0074,-0.0219,0.0071,no clear difference
-P3_random_delays,P3_random_delays|cohort_spread=2000,cohort_spread=2000,coordinated,B_tuned,30,account F1 (C minus baseline),-0.9988,-1.0001,-0.9974,C worse
-P4_participation,P4_participation|participation=1.0,participation=1.0,coordinated,A_overlap_only,30,account F1 (C minus baseline),0.0158,0.0110,0.0206,C better
-P4_participation,P4_participation|participation=1.0,participation=1.0,coordinated,B_time_bucket,30,account F1 (C minus baseline),-0.0012,-0.0026,0.0001,no clear difference
-P4_participation,P4_participation|participation=1.0,participation=1.0,coordinated,B_tuned,30,account F1 (C minus baseline),-0.0012,-0.0026,0.0001,no clear difference
-P4_participation,P4_participation|participation=0.8,participation=0.8,coordinated,A_overlap_only,30,account F1 (C minus baseline),0.0191,0.0134,0.0248,C better
-P4_participation,P4_participation|participation=0.8,participation=0.8,coordinated,B_time_bucket,30,account F1 (C minus baseline),0.0013,-0.0011,0.0038,no clear difference
-P4_participation,P4_participation|participation=0.8,participation=0.8,coordinated,B_tuned,30,account F1 (C minus baseline),0.0017,-0.0008,0.0043,no clear difference
-P4_participation,P4_participation|participation=0.6,participation=0.6,coordinated,A_overlap_only,30,account F1 (C minus baseline),0.0592,0.0414,0.0769,C better
-P4_participation,P4_participation|participation=0.6,participation=0.6,coordinated,B_time_bucket,30,account F1 (C minus baseline),-0.1017,-0.1965,-0.0070,C worse
-P4_participation,P4_participation|participation=0.6,participation=0.6,coordinated,B_tuned,30,account F1 (C minus baseline),-0.1079,-0.2025,-0.0133,C worse
-P4_participation,P4_participation|participation=0.4,participation=0.4,coordinated,A_overlap_only,30,account F1 (C minus baseline),0.0000,0.0000,0.0000,no clear difference
-P4_participation,P4_participation|participation=0.4,participation=0.4,coordinated,B_time_bucket,30,account F1 (C minus baseline),-0.5101,-0.5677,-0.4526,C worse
-P4_participation,P4_participation|participation=0.4,participation=0.4,coordinated,B_tuned,30,account F1 (C minus baseline),-0.4340,-0.5466,-0.3213,C worse
-P4_participation,P4_participation|participation=0.2,participation=0.2,coordinated,A_overlap_only,30,account F1 (C minus baseline),0.0000,0.0000,0.0000,no clear difference
-P4_participation,P4_participation|participation=0.2,participation=0.2,coordinated,B_time_bucket,30,account F1 (C minus baseline),-0.0118,-0.0348,0.0113,no clear difference
-P4_participation,P4_participation|participation=0.2,participation=0.2,coordinated,B_tuned,30,account F1 (C minus baseline),0.0000,0.0000,0.0000,no clear difference
-P5_rotation,P5_rotation|rotation=0,rotation=0,coordinated,A_overlap_only,30,account F1 (C minus baseline),0.0158,0.0110,0.0206,C better
-P5_rotation,P5_rotation|rotation=0,rotation=0,coordinated,B_time_bucket,30,account F1 (C minus baseline),-0.0012,-0.0026,0.0001,no clear difference
-P5_rotation,P5_rotation|rotation=0,rotation=0,coordinated,B_tuned,30,account F1 (C minus baseline),-0.0012,-0.0026,0.0001,no clear difference
-P5_rotation,P5_rotation|rotation=0.1,rotation=0.1,coordinated,A_overlap_only,30,account F1 (C minus baseline),0.0916,0.0809,0.1023,C better
-P5_rotation,P5_rotation|rotation=0.1,rotation=0.1,coordinated,B_time_bucket,30,account F1 (C minus baseline),0.0807,0.0710,0.0904,C better
-P5_rotation,P5_rotation|rotation=0.1,rotation=0.1,coordinated,B_tuned,30,account F1 (C minus baseline),0.0814,0.0716,0.0913,C better
-P5_rotation,P5_rotation|rotation=0.2,rotation=0.2,coordinated,A_overlap_only,30,account F1 (C minus baseline),0.0227,-0.0857,0.1310,no clear difference
-P5_rotation,P5_rotation|rotation=0.2,rotation=0.2,coordinated,B_time_bucket,30,account F1 (C minus baseline),0.0158,-0.0925,0.1242,no clear difference
-P5_rotation,P5_rotation|rotation=0.2,rotation=0.2,coordinated,B_tuned,30,account F1 (C minus baseline),0.0156,-0.0926,0.1238,no clear difference
-P5_rotation,P5_rotation|rotation=0.4,rotation=0.4,coordinated,A_overlap_only,30,account F1 (C minus baseline),-0.2166,-0.2928,-0.1403,C worse
-P5_rotation,P5_rotation|rotation=0.4,rotation=0.4,coordinated,B_time_bucket,30,account F1 (C minus baseline),-0.1084,-0.2189,0.0022,no clear difference
-P5_rotation,P5_rotation|rotation=0.4,rotation=0.4,coordinated,B_tuned,30,account F1 (C minus baseline),-0.1146,-0.2253,-0.0038,C worse
-P5_rotation,P5_rotation|rotation=0.6,rotation=0.6,coordinated,A_overlap_only,30,account F1 (C minus baseline),0.0008,0.0002,0.0014,C better
-P5_rotation,P5_rotation|rotation=0.6,rotation=0.6,coordinated,B_time_bucket,30,account F1 (C minus baseline),-0.1157,-0.1573,-0.0742,C worse
-P5_rotation,P5_rotation|rotation=0.6,rotation=0.6,coordinated,B_tuned,30,account F1 (C minus baseline),-0.0990,-0.1535,-0.0445,C worse
-P5_rotation,P5_rotation|rotation=0.8,rotation=0.8,coordinated,A_overlap_only,30,account F1 (C minus baseline),0.0000,0.0000,0.0000,no clear difference
-P5_rotation,P5_rotation|rotation=0.8,rotation=0.8,coordinated,B_time_bucket,30,account F1 (C minus baseline),-0.0085,-0.0155,-0.0016,C worse
-P5_rotation,P5_rotation|rotation=0.8,rotation=0.8,coordinated,B_tuned,30,account F1 (C minus baseline),0.0000,0.0000,0.0000,no clear difference
-P6_notification_bursts,P6_notification_bursts|loyal_delay_mean=15,loyal_delay_mean=15,organic-only,A_overlap_only,30,any flagged group (C minus baseline),-1.0000,-1.0000,-1.0000,C better
-P6_notification_bursts,P6_notification_bursts|loyal_delay_mean=15,loyal_delay_mean=15,organic-only,B_time_bucket,30,any flagged group (C minus baseline),-1.0000,-1.0000,-1.0000,C better
-P6_notification_bursts,P6_notification_bursts|loyal_delay_mean=15,loyal_delay_mean=15,organic-only,B_tuned,30,any flagged group (C minus baseline),-1.0000,-1.0000,-1.0000,C better
-P6_notification_bursts,P6_notification_bursts|loyal_delay_mean=45,loyal_delay_mean=45,organic-only,A_overlap_only,30,any flagged group (C minus baseline),-1.0000,-1.0000,-1.0000,C better
-P6_notification_bursts,P6_notification_bursts|loyal_delay_mean=45,loyal_delay_mean=45,organic-only,B_time_bucket,30,any flagged group (C minus baseline),-1.0000,-1.0000,-1.0000,C better
-P6_notification_bursts,P6_notification_bursts|loyal_delay_mean=45,loyal_delay_mean=45,organic-only,B_tuned,30,any flagged group (C minus baseline),-1.0000,-1.0000,-1.0000,C better
-P6_notification_bursts,P6_notification_bursts|loyal_delay_mean=120,loyal_delay_mean=120,organic-only,A_overlap_only,30,any flagged group (C minus baseline),-1.0000,-1.0000,-1.0000,C better
-P6_notification_bursts,P6_notification_bursts|loyal_delay_mean=120,loyal_delay_mean=120,organic-only,B_time_bucket,30,any flagged group (C minus baseline),-1.0000,-1.0000,-1.0000,C better
-P6_notification_bursts,P6_notification_bursts|loyal_delay_mean=120,loyal_delay_mean=120,organic-only,B_tuned,30,any flagged group (C minus baseline),-1.0000,-1.0000,-1.0000,C better
-P6_notification_bursts,P6_notification_bursts|loyal_delay_mean=300,loyal_delay_mean=300,organic-only,A_overlap_only,30,any flagged group (C minus baseline),-1.0000,-1.0000,-1.0000,C better
-P6_notification_bursts,P6_notification_bursts|loyal_delay_mean=300,loyal_delay_mean=300,organic-only,B_time_bucket,30,any flagged group (C minus baseline),-0.7333,-0.8943,-0.5724,C better
-P6_notification_bursts,P6_notification_bursts|loyal_delay_mean=300,loyal_delay_mean=300,organic-only,B_tuned,30,any flagged group (C minus baseline),-0.9667,-1.0320,-0.9013,C better
-P6_notification_bursts,P6_notification_bursts|loyal_delay_mean=900,loyal_delay_mean=900,organic-only,A_overlap_only,30,any flagged group (C minus baseline),-1.0000,-1.0000,-1.0000,C better
-P6_notification_bursts,P6_notification_bursts|loyal_delay_mean=900,loyal_delay_mean=900,organic-only,B_time_bucket,30,any flagged group (C minus baseline),0.0000,0.0000,0.0000,no clear difference
-P6_notification_bursts,P6_notification_bursts|loyal_delay_mean=900,loyal_delay_mean=900,organic-only,B_tuned,30,any flagged group (C minus baseline),-0.5333,-0.7149,-0.3518,C better
-P6_notification_bursts,P6_notification_bursts|loyal_delay_mean=1800,loyal_delay_mean=1800,organic-only,A_overlap_only,30,any flagged group (C minus baseline),-1.0000,-1.0000,-1.0000,C better
-P6_notification_bursts,P6_notification_bursts|loyal_delay_mean=1800,loyal_delay_mean=1800,organic-only,B_time_bucket,30,any flagged group (C minus baseline),0.0000,0.0000,0.0000,no clear difference
-P6_notification_bursts,P6_notification_bursts|loyal_delay_mean=1800,loyal_delay_mean=1800,organic-only,B_tuned,30,any flagged group (C minus baseline),-0.0333,-0.0987,0.0320,no clear difference
-P7_heavy_users,P7_heavy_users|heavy_weight=1,heavy_weight=1,coordinated,A_overlap_only,30,account F1 (C minus baseline),0.0029,0.0004,0.0054,C better
-P7_heavy_users,P7_heavy_users|heavy_weight=1,heavy_weight=1,coordinated,B_time_bucket,30,account F1 (C minus baseline),-0.0012,-0.0030,0.0005,no clear difference
-P7_heavy_users,P7_heavy_users|heavy_weight=1,heavy_weight=1,coordinated,B_tuned,30,account F1 (C minus baseline),-0.0008,-0.0019,0.0003,no clear difference
-P7_heavy_users,P7_heavy_users|heavy_weight=1 (organic-only),heavy_weight=1 (organic-only),organic-only,A_overlap_only,30,any flagged group (C minus baseline),0.0000,0.0000,0.0000,no clear difference
-P7_heavy_users,P7_heavy_users|heavy_weight=1 (organic-only),heavy_weight=1 (organic-only),organic-only,B_time_bucket,30,any flagged group (C minus baseline),0.0000,0.0000,0.0000,no clear difference
-P7_heavy_users,P7_heavy_users|heavy_weight=1 (organic-only),heavy_weight=1 (organic-only),organic-only,B_tuned,30,any flagged group (C minus baseline),0.0000,0.0000,0.0000,no clear difference
-P7_heavy_users,P7_heavy_users|heavy_weight=5,heavy_weight=5,coordinated,A_overlap_only,30,account F1 (C minus baseline),0.0158,0.0110,0.0206,C better
-P7_heavy_users,P7_heavy_users|heavy_weight=5,heavy_weight=5,coordinated,B_time_bucket,30,account F1 (C minus baseline),-0.0012,-0.0026,0.0001,no clear difference
-P7_heavy_users,P7_heavy_users|heavy_weight=5,heavy_weight=5,coordinated,B_tuned,30,account F1 (C minus baseline),-0.0012,-0.0026,0.0001,no clear difference
-P7_heavy_users,P7_heavy_users|heavy_weight=5 (organic-only),heavy_weight=5 (organic-only),organic-only,A_overlap_only,30,any flagged group (C minus baseline),0.0000,0.0000,0.0000,no clear difference
-P7_heavy_users,P7_heavy_users|heavy_weight=5 (organic-only),heavy_weight=5 (organic-only),organic-only,B_time_bucket,30,any flagged group (C minus baseline),0.0000,0.0000,0.0000,no clear difference
-P7_heavy_users,P7_heavy_users|heavy_weight=5 (organic-only),heavy_weight=5 (organic-only),organic-only,B_tuned,30,any flagged group (C minus baseline),0.0000,0.0000,0.0000,no clear difference
-P7_heavy_users,P7_heavy_users|heavy_weight=20,heavy_weight=20,coordinated,A_overlap_only,30,account F1 (C minus baseline),0.0947,0.0785,0.1110,C better
-P7_heavy_users,P7_heavy_users|heavy_weight=20,heavy_weight=20,coordinated,B_time_bucket,30,account F1 (C minus baseline),-0.0033,-0.0053,-0.0013,C worse
-P7_heavy_users,P7_heavy_users|heavy_weight=20,heavy_weight=20,coordinated,B_tuned,30,account F1 (C minus baseline),-0.0033,-0.0053,-0.0013,C worse
-P7_heavy_users,P7_heavy_users|heavy_weight=20 (organic-only),heavy_weight=20 (organic-only),organic-only,A_overlap_only,30,any flagged group (C minus baseline),-0.0667,-0.1575,0.0241,no clear difference
-P7_heavy_users,P7_heavy_users|heavy_weight=20 (organic-only),heavy_weight=20 (organic-only),organic-only,B_time_bucket,30,any flagged group (C minus baseline),0.0000,0.0000,0.0000,no clear difference
-P7_heavy_users,P7_heavy_users|heavy_weight=20 (organic-only),heavy_weight=20 (organic-only),organic-only,B_tuned,30,any flagged group (C minus baseline),0.0000,0.0000,0.0000,no clear difference
-P7_heavy_users,P7_heavy_users|heavy_weight=50,heavy_weight=50,coordinated,A_overlap_only,30,account F1 (C minus baseline),0.1398,0.1241,0.1556,C better
-P7_heavy_users,P7_heavy_users|heavy_weight=50,heavy_weight=50,coordinated,B_time_bucket,30,account F1 (C minus baseline),-0.0069,-0.0107,-0.0032,C worse
-P7_heavy_users,P7_heavy_users|heavy_weight=50,heavy_weight=50,coordinated,B_tuned,30,account F1 (C minus baseline),-0.0069,-0.0107,-0.0032,C worse
-P7_heavy_users,P7_heavy_users|heavy_weight=50 (organic-only),heavy_weight=50 (organic-only),organic-only,A_overlap_only,30,any flagged group (C minus baseline),0.0000,0.0000,0.0000,no clear difference
-P7_heavy_users,P7_heavy_users|heavy_weight=50 (organic-only),heavy_weight=50 (organic-only),organic-only,B_time_bucket,30,any flagged group (C minus baseline),0.0000,0.0000,0.0000,no clear difference
-P7_heavy_users,P7_heavy_users|heavy_weight=50 (organic-only),heavy_weight=50 (organic-only),organic-only,B_tuned,30,any flagged group (C minus baseline),0.0000,0.0000,0.0000,no clear difference
-P8_jitter,P8_jitter|jitter=5,jitter=5,coordinated,A_overlap_only,30,account F1 (C minus baseline),0.0158,0.0110,0.0206,C better
-P8_jitter,P8_jitter|jitter=5,jitter=5,coordinated,B_time_bucket,30,account F1 (C minus baseline),-0.0012,-0.0026,0.0001,no clear difference
-P8_jitter,P8_jitter|jitter=5,jitter=5,coordinated,B_tuned,30,account F1 (C minus baseline),-0.0012,-0.0026,0.0001,no clear difference
-P8_jitter,P8_jitter|jitter=20,jitter=20,coordinated,A_overlap_only,30,account F1 (C minus baseline),0.0088,0.0019,0.0157,C better
-P8_jitter,P8_jitter|jitter=20,jitter=20,coordinated,B_time_bucket,30,account F1 (C minus baseline),-0.0082,-0.0139,-0.0025,C worse
-P8_jitter,P8_jitter|jitter=20,jitter=20,coordinated,B_tuned,30,account F1 (C minus baseline),-0.0082,-0.0139,-0.0025,C worse
-P8_jitter,P8_jitter|jitter=40,jitter=40,coordinated,A_overlap_only,30,account F1 (C minus baseline),-0.5661,-0.6944,-0.4377,C worse
-P8_jitter,P8_jitter|jitter=40,jitter=40,coordinated,B_time_bucket,30,account F1 (C minus baseline),-0.5831,-0.7109,-0.4553,C worse
-P8_jitter,P8_jitter|jitter=40,jitter=40,coordinated,B_tuned,30,account F1 (C minus baseline),-0.5831,-0.7109,-0.4553,C worse
-P8_jitter,P8_jitter|jitter=80,jitter=80,coordinated,A_overlap_only,30,account F1 (C minus baseline),-0.8552,-0.9401,-0.7702,C worse
-P8_jitter,P8_jitter|jitter=80,jitter=80,coordinated,B_time_bucket,30,account F1 (C minus baseline),-0.8722,-0.9578,-0.7866,C worse
-P8_jitter,P8_jitter|jitter=80,jitter=80,coordinated,B_tuned,30,account F1 (C minus baseline),-0.8722,-0.9578,-0.7866,C worse
+experiment,config_id,label,kind,baseline,n_seeds,metric,mean_difference,ci_low,ci_high,verdict,boot_low,boot_high,verdict_bootstrap
+P1_headline,P1_headline|coordinated,coordinated,coordinated,A_overlap_only,30,account F1 (C minus baseline),0.0158,0.0110,0.0206,C better,0.0110,0.0206,C better
+P1_headline,P1_headline|coordinated,coordinated,coordinated,B_time_bucket,30,account F1 (C minus baseline),-0.0012,-0.0026,0.0001,no clear difference,-0.0029,0.0000,no clear difference
+P1_headline,P1_headline|coordinated,coordinated,coordinated,B_tuned,30,account F1 (C minus baseline),-0.0012,-0.0026,0.0001,no clear difference,-0.0029,0.0000,no clear difference
+P1_headline,"P1_headline|coordinated, adjacent ids + repost signal","coordinated, adjacent ids + repost signal",coordinated,A_overlap_only,30,account F1 (C minus baseline),0.0098,0.0063,0.0133,C better,0.0065,0.0134,C better
+P1_headline,"P1_headline|coordinated, adjacent ids + repost signal","coordinated, adjacent ids + repost signal",coordinated,B_time_bucket,30,account F1 (C minus baseline),-0.0012,-0.0026,0.0001,no clear difference,-0.0029,0.0000,no clear difference
+P1_headline,"P1_headline|coordinated, adjacent ids + repost signal","coordinated, adjacent ids + repost signal",coordinated,B_tuned,30,account F1 (C minus baseline),-0.0012,-0.0026,0.0001,no clear difference,-0.0025,0.0000,no clear difference
+P1_headline,P1_headline|organic-only,organic-only,organic-only,A_overlap_only,30,any flagged group (C minus baseline),0.0000,0.0000,0.0000,no clear difference,0.0000,0.0000,no clear difference
+P1_headline,P1_headline|organic-only,organic-only,organic-only,B_time_bucket,30,any flagged group (C minus baseline),0.0000,0.0000,0.0000,no clear difference,0.0000,0.0000,no clear difference
+P1_headline,P1_headline|organic-only,organic-only,organic-only,B_tuned,30,any flagged group (C minus baseline),0.0000,0.0000,0.0000,no clear difference,0.0000,0.0000,no clear difference
+P1_headline,P1_headline|organic + loyal followers,organic + loyal followers,organic-only,A_overlap_only,30,any flagged group (C minus baseline),-1.0000,-1.0000,-1.0000,C better,-1.0000,-1.0000,C better
+P1_headline,P1_headline|organic + loyal followers,organic + loyal followers,organic-only,B_time_bucket,30,any flagged group (C minus baseline),0.0000,0.0000,0.0000,no clear difference,0.0000,0.0000,no clear difference
+P1_headline,P1_headline|organic + loyal followers,organic + loyal followers,organic-only,B_tuned,30,any flagged group (C minus baseline),-0.0333,-0.0987,0.0320,no clear difference,-0.1000,0.0000,no clear difference
+P1_headline,P1_headline|organic + notification burst,organic + notification burst,organic-only,A_overlap_only,30,any flagged group (C minus baseline),-1.0000,-1.0000,-1.0000,C better,-1.0000,-1.0000,C better
+P1_headline,P1_headline|organic + notification burst,organic + notification burst,organic-only,B_time_bucket,30,any flagged group (C minus baseline),-1.0000,-1.0000,-1.0000,C better,-1.0000,-1.0000,C better
+P1_headline,P1_headline|organic + notification burst,organic + notification burst,organic-only,B_tuned,30,any flagged group (C minus baseline),-1.0000,-1.0000,-1.0000,C better,-1.0000,-1.0000,C better
+P1_headline,P1_headline|coordinated + loyal followers,coordinated + loyal followers,coordinated,A_overlap_only,30,account F1 (C minus baseline),0.3143,0.3110,0.3176,C better,0.3112,0.3178,C better
+P1_headline,P1_headline|coordinated + loyal followers,coordinated + loyal followers,coordinated,B_time_bucket,30,account F1 (C minus baseline),-0.0008,-0.0019,0.0003,no clear difference,-0.0021,0.0000,no clear difference
+P1_headline,P1_headline|coordinated + loyal followers,coordinated + loyal followers,coordinated,B_tuned,30,account F1 (C minus baseline),-0.0008,-0.0019,0.0003,no clear difference,-0.0021,0.0000,no clear difference
+P2_cohort_spread,P2_cohort_spread|cohort_spread=120,cohort_spread=120,coordinated,A_overlap_only,30,account F1 (C minus baseline),0.0158,0.0110,0.0206,C better,0.0110,0.0205,C better
+P2_cohort_spread,P2_cohort_spread|cohort_spread=120,cohort_spread=120,coordinated,B_time_bucket,30,account F1 (C minus baseline),-0.0012,-0.0026,0.0001,no clear difference,-0.0025,0.0000,no clear difference
+P2_cohort_spread,P2_cohort_spread|cohort_spread=120,cohort_spread=120,coordinated,B_tuned,30,account F1 (C minus baseline),-0.0012,-0.0026,0.0001,no clear difference,-0.0025,0.0000,no clear difference
+P2_cohort_spread,P2_cohort_spread|cohort_spread=300,cohort_spread=300,coordinated,A_overlap_only,30,account F1 (C minus baseline),0.0158,0.0110,0.0206,C better,0.0110,0.0206,C better
+P2_cohort_spread,P2_cohort_spread|cohort_spread=300,cohort_spread=300,coordinated,B_time_bucket,30,account F1 (C minus baseline),-0.0012,-0.0026,0.0001,no clear difference,-0.0025,0.0000,no clear difference
+P2_cohort_spread,P2_cohort_spread|cohort_spread=300,cohort_spread=300,coordinated,B_tuned,30,account F1 (C minus baseline),-0.0012,-0.0026,0.0001,no clear difference,-0.0029,0.0000,no clear difference
+P2_cohort_spread,P2_cohort_spread|cohort_spread=600,cohort_spread=600,coordinated,A_overlap_only,30,account F1 (C minus baseline),0.0158,0.0110,0.0206,C better,0.0110,0.0206,C better
+P2_cohort_spread,P2_cohort_spread|cohort_spread=600,cohort_spread=600,coordinated,B_time_bucket,30,account F1 (C minus baseline),0.0023,-0.0022,0.0068,no clear difference,-0.0012,0.0071,no clear difference
+P2_cohort_spread,P2_cohort_spread|cohort_spread=600,cohort_spread=600,coordinated,B_tuned,30,account F1 (C minus baseline),-0.0008,-0.0024,0.0008,no clear difference,-0.0025,0.0008,no clear difference
+P2_cohort_spread,P2_cohort_spread|cohort_spread=1000,cohort_spread=1000,coordinated,A_overlap_only,30,account F1 (C minus baseline),0.0158,0.0110,0.0206,C better,0.0110,0.0206,C better
+P2_cohort_spread,P2_cohort_spread|cohort_spread=1000,cohort_spread=1000,coordinated,B_time_bucket,30,account F1 (C minus baseline),0.0053,-0.0000,0.0105,no clear difference,0.0005,0.0110,C better
+P2_cohort_spread,P2_cohort_spread|cohort_spread=1000,cohort_spread=1000,coordinated,B_tuned,30,account F1 (C minus baseline),0.0000,-0.0020,0.0020,no clear difference,-0.0021,0.0021,no clear difference
+P2_cohort_spread,P2_cohort_spread|cohort_spread=2000,cohort_spread=2000,coordinated,A_overlap_only,30,account F1 (C minus baseline),0.0158,0.0110,0.0206,C better,0.0110,0.0206,C better
+P2_cohort_spread,P2_cohort_spread|cohort_spread=2000,cohort_spread=2000,coordinated,B_time_bucket,30,account F1 (C minus baseline),0.0848,0.0582,0.1115,C better,0.0603,0.1120,C better
+P2_cohort_spread,P2_cohort_spread|cohort_spread=2000,cohort_spread=2000,coordinated,B_tuned,30,account F1 (C minus baseline),0.0083,-0.0054,0.0220,no clear difference,-0.0016,0.0238,no clear difference
+P3_random_delays,P3_random_delays|cohort_spread=120,cohort_spread=120,coordinated,A_overlap_only,30,account F1 (C minus baseline),-0.9407,-0.9922,-0.8892,C worse,-0.9806,-0.8827,C worse
+P3_random_delays,P3_random_delays|cohort_spread=120,cohort_spread=120,coordinated,B_time_bucket,30,account F1 (C minus baseline),-0.9620,-1.0140,-0.9101,C worse,-1.0000,-0.9034,C worse
+P3_random_delays,P3_random_delays|cohort_spread=120,cohort_spread=120,coordinated,B_tuned,30,account F1 (C minus baseline),-0.9620,-1.0140,-0.9101,C worse,-1.0000,-0.9034,C worse
+P3_random_delays,P3_random_delays|cohort_spread=600,cohort_spread=600,coordinated,A_overlap_only,30,account F1 (C minus baseline),-0.9787,-0.9847,-0.9726,C worse,-0.9846,-0.9727,C worse
+P3_random_delays,P3_random_delays|cohort_spread=600,cohort_spread=600,coordinated,B_time_bucket,30,account F1 (C minus baseline),-0.9966,-0.9993,-0.9939,C worse,-0.9987,-0.9936,C worse
+P3_random_delays,P3_random_delays|cohort_spread=600,cohort_spread=600,coordinated,B_tuned,30,account F1 (C minus baseline),-1.0000,-1.0000,-1.0000,C worse,-1.0000,-1.0000,C worse
+P3_random_delays,P3_random_delays|cohort_spread=2000,cohort_spread=2000,coordinated,A_overlap_only,30,account F1 (C minus baseline),-0.9787,-0.9847,-0.9726,C worse,-0.9842,-0.9727,C worse
+P3_random_delays,P3_random_delays|cohort_spread=2000,cohort_spread=2000,coordinated,B_time_bucket,30,account F1 (C minus baseline),-0.0074,-0.0219,0.0071,no clear difference,-0.0222,0.0000,no clear difference
+P3_random_delays,P3_random_delays|cohort_spread=2000,cohort_spread=2000,coordinated,B_tuned,30,account F1 (C minus baseline),-0.9988,-1.0001,-0.9974,C worse,-1.0000,-0.9971,C worse
+P4_participation,P4_participation|participation=1.0,participation=1.0,coordinated,A_overlap_only,30,account F1 (C minus baseline),0.0158,0.0110,0.0206,C better,0.0110,0.0206,C better
+P4_participation,P4_participation|participation=1.0,participation=1.0,coordinated,B_time_bucket,30,account F1 (C minus baseline),-0.0012,-0.0026,0.0001,no clear difference,-0.0029,0.0000,no clear difference
+P4_participation,P4_participation|participation=1.0,participation=1.0,coordinated,B_tuned,30,account F1 (C minus baseline),-0.0012,-0.0026,0.0001,no clear difference,-0.0029,0.0000,no clear difference
+P4_participation,P4_participation|participation=0.8,participation=0.8,coordinated,A_overlap_only,30,account F1 (C minus baseline),0.0191,0.0134,0.0248,C better,0.0135,0.0248,C better
+P4_participation,P4_participation|participation=0.8,participation=0.8,coordinated,B_time_bucket,30,account F1 (C minus baseline),0.0013,-0.0011,0.0038,no clear difference,-0.0011,0.0038,no clear difference
+P4_participation,P4_participation|participation=0.8,participation=0.8,coordinated,B_tuned,30,account F1 (C minus baseline),0.0017,-0.0008,0.0043,no clear difference,-0.0008,0.0043,no clear difference
+P4_participation,P4_participation|participation=0.6,participation=0.6,coordinated,A_overlap_only,30,account F1 (C minus baseline),0.0592,0.0414,0.0769,C better,0.0425,0.0770,C better
+P4_participation,P4_participation|participation=0.6,participation=0.6,coordinated,B_time_bucket,30,account F1 (C minus baseline),-0.1017,-0.1965,-0.0070,C worse,-0.2022,-0.0200,C worse
+P4_participation,P4_participation|participation=0.6,participation=0.6,coordinated,B_tuned,30,account F1 (C minus baseline),-0.1079,-0.2025,-0.0133,C worse,-0.2100,-0.0248,C worse
+P4_participation,P4_participation|participation=0.4,participation=0.4,coordinated,A_overlap_only,30,account F1 (C minus baseline),0.0000,0.0000,0.0000,no clear difference,0.0000,0.0000,no clear difference
+P4_participation,P4_participation|participation=0.4,participation=0.4,coordinated,B_time_bucket,30,account F1 (C minus baseline),-0.5101,-0.5677,-0.4526,C worse,-0.5633,-0.4516,C worse
+P4_participation,P4_participation|participation=0.4,participation=0.4,coordinated,B_tuned,30,account F1 (C minus baseline),-0.4340,-0.5466,-0.3213,C worse,-0.5409,-0.3220,C worse
+P4_participation,P4_participation|participation=0.2,participation=0.2,coordinated,A_overlap_only,30,account F1 (C minus baseline),0.0000,0.0000,0.0000,no clear difference,0.0000,0.0000,no clear difference
+P4_participation,P4_participation|participation=0.2,participation=0.2,coordinated,B_time_bucket,30,account F1 (C minus baseline),-0.0118,-0.0348,0.0113,no clear difference,-0.0353,0.0000,no clear difference
+P4_participation,P4_participation|participation=0.2,participation=0.2,coordinated,B_tuned,30,account F1 (C minus baseline),0.0000,0.0000,0.0000,no clear difference,0.0000,0.0000,no clear difference
+P5_rotation,P5_rotation|rotation=0,rotation=0,coordinated,A_overlap_only,30,account F1 (C minus baseline),0.0158,0.0110,0.0206,C better,0.0110,0.0206,C better
+P5_rotation,P5_rotation|rotation=0,rotation=0,coordinated,B_time_bucket,30,account F1 (C minus baseline),-0.0012,-0.0026,0.0001,no clear difference,-0.0029,0.0000,no clear difference
+P5_rotation,P5_rotation|rotation=0,rotation=0,coordinated,B_tuned,30,account F1 (C minus baseline),-0.0012,-0.0026,0.0001,no clear difference,-0.0029,0.0000,no clear difference
+P5_rotation,P5_rotation|rotation=0.1,rotation=0.1,coordinated,A_overlap_only,30,account F1 (C minus baseline),0.0916,0.0809,0.1023,C better,0.0810,0.1021,C better
+P5_rotation,P5_rotation|rotation=0.1,rotation=0.1,coordinated,B_time_bucket,30,account F1 (C minus baseline),0.0807,0.0710,0.0904,C better,0.0715,0.0904,C better
+P5_rotation,P5_rotation|rotation=0.1,rotation=0.1,coordinated,B_tuned,30,account F1 (C minus baseline),0.0814,0.0716,0.0913,C better,0.0720,0.0913,C better
+P5_rotation,P5_rotation|rotation=0.2,rotation=0.2,coordinated,A_overlap_only,30,account F1 (C minus baseline),0.0227,-0.0857,0.1310,no clear difference,-0.0879,0.1226,no clear difference
+P5_rotation,P5_rotation|rotation=0.2,rotation=0.2,coordinated,B_time_bucket,30,account F1 (C minus baseline),0.0158,-0.0925,0.1242,no clear difference,-0.0980,0.1157,no clear difference
+P5_rotation,P5_rotation|rotation=0.2,rotation=0.2,coordinated,B_tuned,30,account F1 (C minus baseline),0.0156,-0.0926,0.1238,no clear difference,-0.0980,0.1152,no clear difference
+P5_rotation,P5_rotation|rotation=0.4,rotation=0.4,coordinated,A_overlap_only,30,account F1 (C minus baseline),-0.2166,-0.2928,-0.1403,C worse,-0.2894,-0.1402,C worse
+P5_rotation,P5_rotation|rotation=0.4,rotation=0.4,coordinated,B_time_bucket,30,account F1 (C minus baseline),-0.1084,-0.2189,0.0022,no clear difference,-0.2163,0.0017,no clear difference
+P5_rotation,P5_rotation|rotation=0.4,rotation=0.4,coordinated,B_tuned,30,account F1 (C minus baseline),-0.1146,-0.2253,-0.0038,C worse,-0.2226,-0.0080,C worse
+P5_rotation,P5_rotation|rotation=0.6,rotation=0.6,coordinated,A_overlap_only,30,account F1 (C minus baseline),0.0008,0.0002,0.0014,C better,0.0003,0.0015,C better
+P5_rotation,P5_rotation|rotation=0.6,rotation=0.6,coordinated,B_time_bucket,30,account F1 (C minus baseline),-0.1157,-0.1573,-0.0742,C worse,-0.1544,-0.0724,C worse
+P5_rotation,P5_rotation|rotation=0.6,rotation=0.6,coordinated,B_tuned,30,account F1 (C minus baseline),-0.0990,-0.1535,-0.0445,C worse,-0.1499,-0.0436,C worse
+P5_rotation,P5_rotation|rotation=0.8,rotation=0.8,coordinated,A_overlap_only,30,account F1 (C minus baseline),0.0000,0.0000,0.0000,no clear difference,0.0000,0.0000,no clear difference
+P5_rotation,P5_rotation|rotation=0.8,rotation=0.8,coordinated,B_time_bucket,30,account F1 (C minus baseline),-0.0085,-0.0155,-0.0016,C worse,-0.0159,-0.0020,C worse
+P5_rotation,P5_rotation|rotation=0.8,rotation=0.8,coordinated,B_tuned,30,account F1 (C minus baseline),0.0000,0.0000,0.0000,no clear difference,0.0000,0.0000,no clear difference
+P6_notification_bursts,P6_notification_bursts|loyal_delay_mean=15,loyal_delay_mean=15,organic-only,A_overlap_only,30,any flagged group (C minus baseline),-1.0000,-1.0000,-1.0000,C better,-1.0000,-1.0000,C better
+P6_notification_bursts,P6_notification_bursts|loyal_delay_mean=15,loyal_delay_mean=15,organic-only,B_time_bucket,30,any flagged group (C minus baseline),-1.0000,-1.0000,-1.0000,C better,-1.0000,-1.0000,C better
+P6_notification_bursts,P6_notification_bursts|loyal_delay_mean=15,loyal_delay_mean=15,organic-only,B_tuned,30,any flagged group (C minus baseline),-1.0000,-1.0000,-1.0000,C better,-1.0000,-1.0000,C better
+P6_notification_bursts,P6_notification_bursts|loyal_delay_mean=45,loyal_delay_mean=45,organic-only,A_overlap_only,30,any flagged group (C minus baseline),-1.0000,-1.0000,-1.0000,C better,-1.0000,-1.0000,C better
+P6_notification_bursts,P6_notification_bursts|loyal_delay_mean=45,loyal_delay_mean=45,organic-only,B_time_bucket,30,any flagged group (C minus baseline),-1.0000,-1.0000,-1.0000,C better,-1.0000,-1.0000,C better
+P6_notification_bursts,P6_notification_bursts|loyal_delay_mean=45,loyal_delay_mean=45,organic-only,B_tuned,30,any flagged group (C minus baseline),-1.0000,-1.0000,-1.0000,C better,-1.0000,-1.0000,C better
+P6_notification_bursts,P6_notification_bursts|loyal_delay_mean=120,loyal_delay_mean=120,organic-only,A_overlap_only,30,any flagged group (C minus baseline),-1.0000,-1.0000,-1.0000,C better,-1.0000,-1.0000,C better
+P6_notification_bursts,P6_notification_bursts|loyal_delay_mean=120,loyal_delay_mean=120,organic-only,B_time_bucket,30,any flagged group (C minus baseline),-1.0000,-1.0000,-1.0000,C better,-1.0000,-1.0000,C better
+P6_notification_bursts,P6_notification_bursts|loyal_delay_mean=120,loyal_delay_mean=120,organic-only,B_tuned,30,any flagged group (C minus baseline),-1.0000,-1.0000,-1.0000,C better,-1.0000,-1.0000,C better
+P6_notification_bursts,P6_notification_bursts|loyal_delay_mean=300,loyal_delay_mean=300,organic-only,A_overlap_only,30,any flagged group (C minus baseline),-1.0000,-1.0000,-1.0000,C better,-1.0000,-1.0000,C better
+P6_notification_bursts,P6_notification_bursts|loyal_delay_mean=300,loyal_delay_mean=300,organic-only,B_time_bucket,30,any flagged group (C minus baseline),-0.7333,-0.8943,-0.5724,C better,-0.8667,-0.5667,C better
+P6_notification_bursts,P6_notification_bursts|loyal_delay_mean=300,loyal_delay_mean=300,organic-only,B_tuned,30,any flagged group (C minus baseline),-0.9667,-1.0320,-0.9013,C better,-1.0000,-0.9000,C better
+P6_notification_bursts,P6_notification_bursts|loyal_delay_mean=900,loyal_delay_mean=900,organic-only,A_overlap_only,30,any flagged group (C minus baseline),-1.0000,-1.0000,-1.0000,C better,-1.0000,-1.0000,C better
+P6_notification_bursts,P6_notification_bursts|loyal_delay_mean=900,loyal_delay_mean=900,organic-only,B_time_bucket,30,any flagged group (C minus baseline),0.0000,0.0000,0.0000,no clear difference,0.0000,0.0000,no clear difference
+P6_notification_bursts,P6_notification_bursts|loyal_delay_mean=900,loyal_delay_mean=900,organic-only,B_tuned,30,any flagged group (C minus baseline),-0.5333,-0.7149,-0.3518,C better,-0.7000,-0.3667,C better
+P6_notification_bursts,P6_notification_bursts|loyal_delay_mean=1800,loyal_delay_mean=1800,organic-only,A_overlap_only,30,any flagged group (C minus baseline),-1.0000,-1.0000,-1.0000,C better,-1.0000,-1.0000,C better
+P6_notification_bursts,P6_notification_bursts|loyal_delay_mean=1800,loyal_delay_mean=1800,organic-only,B_time_bucket,30,any flagged group (C minus baseline),0.0000,0.0000,0.0000,no clear difference,0.0000,0.0000,no clear difference
+P6_notification_bursts,P6_notification_bursts|loyal_delay_mean=1800,loyal_delay_mean=1800,organic-only,B_tuned,30,any flagged group (C minus baseline),-0.0333,-0.0987,0.0320,no clear difference,-0.1000,0.0000,no clear difference
+P7_heavy_users,P7_heavy_users|heavy_weight=1,heavy_weight=1,coordinated,A_overlap_only,30,account F1 (C minus baseline),0.0029,0.0004,0.0054,C better,0.0004,0.0053,C better
+P7_heavy_users,P7_heavy_users|heavy_weight=1,heavy_weight=1,coordinated,B_time_bucket,30,account F1 (C minus baseline),-0.0012,-0.0030,0.0005,no clear difference,-0.0033,0.0000,no clear difference
+P7_heavy_users,P7_heavy_users|heavy_weight=1,heavy_weight=1,coordinated,B_tuned,30,account F1 (C minus baseline),-0.0008,-0.0019,0.0003,no clear difference,-0.0020,0.0000,no clear difference
+P7_heavy_users,P7_heavy_users|heavy_weight=1 (organic-only),heavy_weight=1 (organic-only),organic-only,A_overlap_only,30,any flagged group (C minus baseline),0.0000,0.0000,0.0000,no clear difference,0.0000,0.0000,no clear difference
+P7_heavy_users,P7_heavy_users|heavy_weight=1 (organic-only),heavy_weight=1 (organic-only),organic-only,B_time_bucket,30,any flagged group (C minus baseline),0.0000,0.0000,0.0000,no clear difference,0.0000,0.0000,no clear difference
+P7_heavy_users,P7_heavy_users|heavy_weight=1 (organic-only),heavy_weight=1 (organic-only),organic-only,B_tuned,30,any flagged group (C minus baseline),0.0000,0.0000,0.0000,no clear difference,0.0000,0.0000,no clear difference
+P7_heavy_users,P7_heavy_users|heavy_weight=5,heavy_weight=5,coordinated,A_overlap_only,30,account F1 (C minus baseline),0.0158,0.0110,0.0206,C better,0.0110,0.0206,C better
+P7_heavy_users,P7_heavy_users|heavy_weight=5,heavy_weight=5,coordinated,B_time_bucket,30,account F1 (C minus baseline),-0.0012,-0.0026,0.0001,no clear difference,-0.0029,0.0000,no clear difference
+P7_heavy_users,P7_heavy_users|heavy_weight=5,heavy_weight=5,coordinated,B_tuned,30,account F1 (C minus baseline),-0.0012,-0.0026,0.0001,no clear difference,-0.0025,0.0000,no clear difference
+P7_heavy_users,P7_heavy_users|heavy_weight=5 (organic-only),heavy_weight=5 (organic-only),organic-only,A_overlap_only,30,any flagged group (C minus baseline),0.0000,0.0000,0.0000,no clear difference,0.0000,0.0000,no clear difference
+P7_heavy_users,P7_heavy_users|heavy_weight=5 (organic-only),heavy_weight=5 (organic-only),organic-only,B_time_bucket,30,any flagged group (C minus baseline),0.0000,0.0000,0.0000,no clear difference,0.0000,0.0000,no clear difference
+P7_heavy_users,P7_heavy_users|heavy_weight=5 (organic-only),heavy_weight=5 (organic-only),organic-only,B_tuned,30,any flagged group (C minus baseline),0.0000,0.0000,0.0000,no clear difference,0.0000,0.0000,no clear difference
+P7_heavy_users,P7_heavy_users|heavy_weight=20,heavy_weight=20,coordinated,A_overlap_only,30,account F1 (C minus baseline),0.0947,0.0785,0.1110,C better,0.0792,0.1111,C better
+P7_heavy_users,P7_heavy_users|heavy_weight=20,heavy_weight=20,coordinated,B_time_bucket,30,account F1 (C minus baseline),-0.0033,-0.0053,-0.0013,C worse,-0.0053,-0.0016,C worse
+P7_heavy_users,P7_heavy_users|heavy_weight=20,heavy_weight=20,coordinated,B_tuned,30,account F1 (C minus baseline),-0.0033,-0.0053,-0.0013,C worse,-0.0053,-0.0012,C worse
+P7_heavy_users,P7_heavy_users|heavy_weight=20 (organic-only),heavy_weight=20 (organic-only),organic-only,A_overlap_only,30,any flagged group (C minus baseline),-0.0667,-0.1575,0.0241,no clear difference,-0.1667,0.0000,no clear difference
+P7_heavy_users,P7_heavy_users|heavy_weight=20 (organic-only),heavy_weight=20 (organic-only),organic-only,B_time_bucket,30,any flagged group (C minus baseline),0.0000,0.0000,0.0000,no clear difference,0.0000,0.0000,no clear difference
+P7_heavy_users,P7_heavy_users|heavy_weight=20 (organic-only),heavy_weight=20 (organic-only),organic-only,B_tuned,30,any flagged group (C minus baseline),0.0000,0.0000,0.0000,no clear difference,0.0000,0.0000,no clear difference
+P7_heavy_users,P7_heavy_users|heavy_weight=50,heavy_weight=50,coordinated,A_overlap_only,30,account F1 (C minus baseline),0.1398,0.1241,0.1556,C better,0.1251,0.1560,C better
+P7_heavy_users,P7_heavy_users|heavy_weight=50,heavy_weight=50,coordinated,B_time_bucket,30,account F1 (C minus baseline),-0.0069,-0.0107,-0.0032,C worse,-0.0110,-0.0036,C worse
+P7_heavy_users,P7_heavy_users|heavy_weight=50,heavy_weight=50,coordinated,B_tuned,30,account F1 (C minus baseline),-0.0069,-0.0107,-0.0032,C worse,-0.0110,-0.0037,C worse
+P7_heavy_users,P7_heavy_users|heavy_weight=50 (organic-only),heavy_weight=50 (organic-only),organic-only,A_overlap_only,30,any flagged group (C minus baseline),0.0000,0.0000,0.0000,no clear difference,0.0000,0.0000,no clear difference
+P7_heavy_users,P7_heavy_users|heavy_weight=50 (organic-only),heavy_weight=50 (organic-only),organic-only,B_time_bucket,30,any flagged group (C minus baseline),0.0000,0.0000,0.0000,no clear difference,0.0000,0.0000,no clear difference
+P7_heavy_users,P7_heavy_users|heavy_weight=50 (organic-only),heavy_weight=50 (organic-only),organic-only,B_tuned,30,any flagged group (C minus baseline),0.0000,0.0000,0.0000,no clear difference,0.0000,0.0000,no clear difference
+P8_jitter,P8_jitter|jitter=5,jitter=5,coordinated,A_overlap_only,30,account F1 (C minus baseline),0.0158,0.0110,0.0206,C better,0.0110,0.0206,C better
+P8_jitter,P8_jitter|jitter=5,jitter=5,coordinated,B_time_bucket,30,account F1 (C minus baseline),-0.0012,-0.0026,0.0001,no clear difference,-0.0029,0.0000,no clear difference
+P8_jitter,P8_jitter|jitter=5,jitter=5,coordinated,B_tuned,30,account F1 (C minus baseline),-0.0012,-0.0026,0.0001,no clear difference,-0.0029,0.0000,no clear difference
+P8_jitter,P8_jitter|jitter=20,jitter=20,coordinated,A_overlap_only,30,account F1 (C minus baseline),0.0088,0.0019,0.0157,C better,0.0019,0.0155,C better
+P8_jitter,P8_jitter|jitter=20,jitter=20,coordinated,B_time_bucket,30,account F1 (C minus baseline),-0.0082,-0.0139,-0.0025,C worse,-0.0143,-0.0030,C worse
+P8_jitter,P8_jitter|jitter=20,jitter=20,coordinated,B_tuned,30,account F1 (C minus baseline),-0.0082,-0.0139,-0.0025,C worse,-0.0143,-0.0030,C worse
+P8_jitter,P8_jitter|jitter=40,jitter=40,coordinated,A_overlap_only,30,account F1 (C minus baseline),-0.5661,-0.6944,-0.4377,C worse,-0.6910,-0.4404,C worse
+P8_jitter,P8_jitter|jitter=40,jitter=40,coordinated,B_time_bucket,30,account F1 (C minus baseline),-0.5831,-0.7109,-0.4553,C worse,-0.7107,-0.4574,C worse
+P8_jitter,P8_jitter|jitter=40,jitter=40,coordinated,B_tuned,30,account F1 (C minus baseline),-0.5831,-0.7109,-0.4553,C worse,-0.7110,-0.4570,C worse
+P8_jitter,P8_jitter|jitter=80,jitter=80,coordinated,A_overlap_only,30,account F1 (C minus baseline),-0.8552,-0.9401,-0.7702,C worse,-0.9323,-0.7680,C worse
+P8_jitter,P8_jitter|jitter=80,jitter=80,coordinated,B_time_bucket,30,account F1 (C minus baseline),-0.8722,-0.9578,-0.7866,C worse,-0.9502,-0.7844,C worse
+P8_jitter,P8_jitter|jitter=80,jitter=80,coordinated,B_tuned,30,account F1 (C minus baseline),-0.8722,-0.9578,-0.7866,C worse,-0.9500,-0.7813,C worse

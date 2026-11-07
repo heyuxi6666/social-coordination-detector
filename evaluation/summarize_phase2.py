@@ -13,6 +13,7 @@ import json
 import math
 import statistics
 import sys
+import zlib
 from collections import defaultdict
 from pathlib import Path
 
@@ -30,7 +31,10 @@ NAMES = {"A_overlap_only": "A overlap-only", "B_time_bucket": "B original", "B_t
 LEGEND = {"A_overlap_only": "A overlap-only", "B_time_bucket": "B original", "B_tuned": "B tuned", "C_v1": "C V1 detector"}
 BASELINES = ("A_overlap_only", "B_time_bucket", "B_tuned")
 PAIRED_FIELDS = ["experiment", "config_id", "label", "kind", "baseline", "n_seeds", "metric", "mean_difference",
-                 "ci_low", "ci_high", "verdict"]
+                 "ci_low", "ci_high", "verdict", "boot_low", "boot_high", "verdict_bootstrap"]
+# ci_low/ci_high/verdict: mean ± 1.96 SE (normal approximation, as pre-registered; can leave [-1, 1]).
+# boot_*: seeded percentile bootstrap (10,000 resamples), always inside the observed range; used in tables.md.
+BOOT_REPS = 10_000
 
 
 def per_seed(rows: list[dict]) -> dict:
@@ -62,10 +66,12 @@ def paired(rows: list[dict]) -> list[dict]:
             diffs = [methods_["C_v1"][s][1] - methods_[baseline][s][1] for s in seeds]
             mean, se = metrics.mean_se(diffs)
             lo, hi = mean - 1.96 * se, mean + 1.96 * se
+            b_lo, b_hi = metrics.bootstrap_mean_ci(diffs, BOOT_REPS, zlib.crc32(f"{config_id}|{baseline}".encode("utf-8")))
             out.append({"experiment": experiment, "config_id": config_id, "label": label,
                         "kind": "coordinated" if coordinated else "organic-only", "baseline": baseline, "n_seeds": len(seeds),
                         "metric": "account F1 (C minus baseline)" if coordinated else "any flagged group (C minus baseline)",
-                        "mean_difference": mean, "ci_low": lo, "ci_high": hi, "verdict": verdict(lo, hi, coordinated)})
+                        "mean_difference": mean, "ci_low": lo, "ci_high": hi, "verdict": verdict(lo, hi, coordinated),
+                        "boot_low": b_lo, "boot_high": b_hi, "verdict_bootstrap": verdict(b_lo, b_hi, coordinated)})
     return out
 
 
@@ -113,26 +119,30 @@ def tables(summary: list[dict], pairs: list[dict], config: dict, info: dict, tun
             lines += [f"| {e['label']} | {base.fmt(e['trace_built_rate'])} | {base.fmt(e['trace_post_recall'])} | {base.fmt(e['trace_post_precision'])} |"
                       for e in traced]
         configs = list(dict.fromkeys(e["config_id"] for e in entries))
-        lines += ["", "Paired per-seed difference, V1 minus baseline (coordinated: account F1, positive favours V1; organic-only: share of datasets with a flagged group, negative favours V1). Mean [95% CI]:", "",
+        lines += ["", "Paired per-seed difference, V1 minus baseline (coordinated: account F1, positive favours V1; organic-only: share of datasets with a flagged group, negative favours V1). Mean [95% percentile-bootstrap CI]; exploratory, no multiple-comparison correction:", "",
                   "| Config | vs A overlap-only | vs B original | vs B tuned |", "|---|---|---|---|"]
         for cid in configs:
             cells = []
             for b in BASELINES:
                 q = pair_index[cid].get(b)
-                cells.append("–" if not q else f"{q['mean_difference']:+.2f} [{q['ci_low']:+.2f}, {q['ci_high']:+.2f}] {q['verdict']}")
+                cells.append("–" if not q else f"{q['mean_difference']:+.2f} [{q['boot_low']:+.2f}, {q['boot_high']:+.2f}] {q['verdict_bootstrap']}")
             lines.append(f"| {cid.split('|', 1)[1]} | " + " | ".join(cells) + " |")
         lines.append("")
-    lines += ["## Scoreboard: number of configurations by paired verdict (V1 vs each baseline)", "",
-              "| Experiment | Baseline | V1 better | V1 worse | No clear difference |", "|---|---|---|---|---|"]
+    lines += ["## Exploratory scoreboard: configurations by paired bootstrap verdict (V1 vs each baseline)", "",
+              "Coordinated configurations are judged on account F1 (higher is better); organic-only configurations on the share "
+              "of datasets with any flagged group (lower is better). The two kinds are counted separately and never combined. "
+              "No multiple-comparison correction: treat the counts as descriptive.", "",
+              "| Experiment | Kind | Baseline | V1 better | V1 worse | No clear difference |", "|---|---|---|---|---|---|"]
     for experiment in by_experiment:
+        for kind in ("coordinated", "organic-only"):
+            for b in BASELINES:
+                c = [q["verdict_bootstrap"] for q in pairs if q["experiment"] == experiment and q["baseline"] == b and q["kind"] == kind]
+                if c:
+                    lines.append(f"| {experiment} | {kind} | {NAMES[b]} | {c.count('C better')} | {c.count('C worse')} | {c.count('no clear difference')} |")
+    for kind in ("coordinated", "organic-only"):
         for b in BASELINES:
-            c = [q["verdict"] for q in pairs if q["experiment"] == experiment and q["baseline"] == b]
-            lines.append(f"| {experiment} | {NAMES[b]} | {c.count('C better')} | {c.count('C worse')} | {c.count('no clear difference')} |")
-    total = defaultdict(lambda: [0, 0, 0])
-    for q in pairs:
-        total[q["baseline"]][["C better", "C worse", "no clear difference"].index(q["verdict"])] += 1
-    for b in BASELINES:
-        lines.append(f"| **all** | {NAMES[b]} | {total[b][0]} | {total[b][1]} | {total[b][2]} |")
+            c = [q["verdict_bootstrap"] for q in pairs if q["baseline"] == b and q["kind"] == kind]
+            lines.append(f"| **all** | {kind} | {NAMES[b]} | {c.count('C better')} | {c.count('C worse')} | {c.count('no clear difference')} |")
     lines.append("")
     return "\n".join(lines)
 

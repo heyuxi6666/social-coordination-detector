@@ -15,6 +15,7 @@ reported with its standard error; rates carry Wilson 95% intervals.
 from __future__ import annotations
 
 import math
+import random
 import statistics
 from typing import Any, Iterable
 
@@ -60,6 +61,20 @@ def mean_se(values: Iterable[float]) -> tuple[float, float]:
     if len(values) == 1:
         return (values[0], 0.0)
     return (statistics.fmean(values), statistics.stdev(values) / math.sqrt(len(values)))
+
+
+def bootstrap_mean_ci(values: Iterable[float], reps: int = 10_000, seed: int = 0, level: float = 0.95) -> tuple[float, float]:
+    """Percentile-bootstrap interval for a mean.  Always inside [min(values), max(values)], unlike mean ± 1.96 SE."""
+    values = list(values)
+    if not values:
+        return (math.nan, math.nan)
+    if min(values) == max(values):
+        return (values[0], values[0])
+    rng = random.Random(seed)
+    n = len(values)
+    means = sorted(math.fsum(rng.choices(values, k=n)) / n for _ in range(reps))
+    tail = (1 - level) / 2
+    return (means[round(tail * (reps - 1))], means[round((1 - tail) * (reps - 1))])
 
 
 def summarise(rows: list[dict[str, Any]]) -> dict[str, Any]:

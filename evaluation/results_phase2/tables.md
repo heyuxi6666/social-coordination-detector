@@ -41,14 +41,14 @@ Columns as in `results/tables.md`; *Fragments* = unmatched groups that still con
 | coordinated + loyal followers | C V1 (strong only) | 0.00 [0.00, 0.11] | – | 0.00 | 0.00 ± 0.00 | 0.00 | 0.00 | – | 0.000 | 219.8 |
 | coordinated + loyal followers | B tuned | 1.00 [0.89, 1.00] | 1.00 | 1.00 | 1.00 ± 0.00 | 0.00 | 0.00 | – | 0.000 | 3.1 |
 
-Paired per-seed difference, V1 minus baseline (coordinated: account F1, positive favours V1; organic-only: share of datasets with a flagged group, negative favours V1). Mean [95% CI]:
+Paired per-seed difference, V1 minus baseline (coordinated: account F1, positive favours V1; organic-only: share of datasets with a flagged group, negative favours V1). Mean [95% percentile-bootstrap CI]; exploratory, no multiple-comparison correction:
 
 | Config | vs A overlap-only | vs B original | vs B tuned |
 |---|---|---|---|
 | coordinated | +0.02 [+0.01, +0.02] C better | -0.00 [-0.00, +0.00] no clear difference | -0.00 [-0.00, +0.00] no clear difference |
 | coordinated, adjacent ids + repost signal | +0.01 [+0.01, +0.01] C better | -0.00 [-0.00, +0.00] no clear difference | -0.00 [-0.00, +0.00] no clear difference |
 | organic-only | +0.00 [+0.00, +0.00] no clear difference | +0.00 [+0.00, +0.00] no clear difference | +0.00 [+0.00, +0.00] no clear difference |
-| organic + loyal followers | -1.00 [-1.00, -1.00] C better | +0.00 [+0.00, +0.00] no clear difference | -0.03 [-0.10, +0.03] no clear difference |
+| organic + loyal followers | -1.00 [-1.00, -1.00] C better | +0.00 [+0.00, +0.00] no clear difference | -0.03 [-0.10, +0.00] no clear difference |
 | organic + notification burst | -1.00 [-1.00, -1.00] C better | -1.00 [-1.00, -1.00] C better | -1.00 [-1.00, -1.00] C better |
 | coordinated + loyal followers | +0.31 [+0.31, +0.32] C better | -0.00 [-0.00, +0.00] no clear difference | -0.00 [-0.00, +0.00] no clear difference |
 
@@ -82,15 +82,15 @@ Paired per-seed difference, V1 minus baseline (coordinated: account F1, positive
 | cohort_spread=2000 | C V1 (strong only) | 0.00 [0.00, 0.11] | – | 0.00 | 0.00 ± 0.00 | 0.00 | 0.00 | – | 0.000 | 159.2 |
 | cohort_spread=2000 | B tuned | 1.00 [0.89, 1.00] | 1.00 | 0.98 | 0.99 ± 0.01 | 0.00 | 0.00 | – | 0.000 | 2.9 |
 
-Paired per-seed difference, V1 minus baseline (coordinated: account F1, positive favours V1; organic-only: share of datasets with a flagged group, negative favours V1). Mean [95% CI]:
+Paired per-seed difference, V1 minus baseline (coordinated: account F1, positive favours V1; organic-only: share of datasets with a flagged group, negative favours V1). Mean [95% percentile-bootstrap CI]; exploratory, no multiple-comparison correction:
 
 | Config | vs A overlap-only | vs B original | vs B tuned |
 |---|---|---|---|
 | cohort_spread=120 | +0.02 [+0.01, +0.02] C better | -0.00 [-0.00, +0.00] no clear difference | -0.00 [-0.00, +0.00] no clear difference |
 | cohort_spread=300 | +0.02 [+0.01, +0.02] C better | -0.00 [-0.00, +0.00] no clear difference | -0.00 [-0.00, +0.00] no clear difference |
 | cohort_spread=600 | +0.02 [+0.01, +0.02] C better | +0.00 [-0.00, +0.01] no clear difference | -0.00 [-0.00, +0.00] no clear difference |
-| cohort_spread=1000 | +0.02 [+0.01, +0.02] C better | +0.01 [-0.00, +0.01] no clear difference | +0.00 [-0.00, +0.00] no clear difference |
-| cohort_spread=2000 | +0.02 [+0.01, +0.02] C better | +0.08 [+0.06, +0.11] C better | +0.01 [-0.01, +0.02] no clear difference |
+| cohort_spread=1000 | +0.02 [+0.01, +0.02] C better | +0.01 [+0.00, +0.01] C better | +0.00 [-0.00, +0.00] no clear difference |
+| cohort_spread=2000 | +0.02 [+0.01, +0.02] C better | +0.08 [+0.06, +0.11] C better | +0.01 [-0.00, +0.02] no clear difference |
 
 ## P3_random_delays (RQ2): Independently randomised reaction delays (no repeated per-account offset)
 
@@ -112,13 +112,13 @@ Paired per-seed difference, V1 minus baseline (coordinated: account F1, positive
 | cohort_spread=2000 | C V1 (strong only) | 0.00 [0.00, 0.11] | – | 0.00 | 0.00 ± 0.00 | 0.00 | 0.00 | – | 0.000 | 158.2 |
 | cohort_spread=2000 | B tuned | 1.00 [0.89, 1.00] | 1.00 | 1.00 | 1.00 ± 0.00 | 0.00 | 0.00 | – | 0.000 | 2.9 |
 
-Paired per-seed difference, V1 minus baseline (coordinated: account F1, positive favours V1; organic-only: share of datasets with a flagged group, negative favours V1). Mean [95% CI]:
+Paired per-seed difference, V1 minus baseline (coordinated: account F1, positive favours V1; organic-only: share of datasets with a flagged group, negative favours V1). Mean [95% percentile-bootstrap CI]; exploratory, no multiple-comparison correction:
 
 | Config | vs A overlap-only | vs B original | vs B tuned |
 |---|---|---|---|
-| cohort_spread=120 | -0.94 [-0.99, -0.89] C worse | -0.96 [-1.01, -0.91] C worse | -0.96 [-1.01, -0.91] C worse |
+| cohort_spread=120 | -0.94 [-0.98, -0.88] C worse | -0.96 [-1.00, -0.90] C worse | -0.96 [-1.00, -0.90] C worse |
 | cohort_spread=600 | -0.98 [-0.98, -0.97] C worse | -1.00 [-1.00, -0.99] C worse | -1.00 [-1.00, -1.00] C worse |
-| cohort_spread=2000 | -0.98 [-0.98, -0.97] C worse | -0.01 [-0.02, +0.01] no clear difference | -1.00 [-1.00, -1.00] C worse |
+| cohort_spread=2000 | -0.98 [-0.98, -0.97] C worse | -0.01 [-0.02, +0.00] no clear difference | -1.00 [-1.00, -1.00] C worse |
 
 ## P4_participation (RQ2): Participation rate of group accounts per coordinated post
 
@@ -150,15 +150,15 @@ Paired per-seed difference, V1 minus baseline (coordinated: account F1, positive
 | participation=0.2 | C V1 (strong only) | 0.00 [0.00, 0.11] | – | 0.00 | 0.00 ± 0.00 | 0.00 | 0.00 | – | 0.000 | 24.9 |
 | participation=0.2 | B tuned | 0.00 [0.00, 0.11] | – | 0.00 | 0.00 ± 0.00 | 0.00 | 0.00 | – | 0.000 | 1.7 |
 
-Paired per-seed difference, V1 minus baseline (coordinated: account F1, positive favours V1; organic-only: share of datasets with a flagged group, negative favours V1). Mean [95% CI]:
+Paired per-seed difference, V1 minus baseline (coordinated: account F1, positive favours V1; organic-only: share of datasets with a flagged group, negative favours V1). Mean [95% percentile-bootstrap CI]; exploratory, no multiple-comparison correction:
 
 | Config | vs A overlap-only | vs B original | vs B tuned |
 |---|---|---|---|
 | participation=1.0 | +0.02 [+0.01, +0.02] C better | -0.00 [-0.00, +0.00] no clear difference | -0.00 [-0.00, +0.00] no clear difference |
 | participation=0.8 | +0.02 [+0.01, +0.02] C better | +0.00 [-0.00, +0.00] no clear difference | +0.00 [-0.00, +0.00] no clear difference |
-| participation=0.6 | +0.06 [+0.04, +0.08] C better | -0.10 [-0.20, -0.01] C worse | -0.11 [-0.20, -0.01] C worse |
-| participation=0.4 | +0.00 [+0.00, +0.00] no clear difference | -0.51 [-0.57, -0.45] C worse | -0.43 [-0.55, -0.32] C worse |
-| participation=0.2 | +0.00 [+0.00, +0.00] no clear difference | -0.01 [-0.03, +0.01] no clear difference | +0.00 [+0.00, +0.00] no clear difference |
+| participation=0.6 | +0.06 [+0.04, +0.08] C better | -0.10 [-0.20, -0.02] C worse | -0.11 [-0.21, -0.02] C worse |
+| participation=0.4 | +0.00 [+0.00, +0.00] no clear difference | -0.51 [-0.56, -0.45] C worse | -0.43 [-0.54, -0.32] C worse |
+| participation=0.2 | +0.00 [+0.00, +0.00] no clear difference | -0.01 [-0.04, +0.00] no clear difference | +0.00 [+0.00, +0.00] no clear difference |
 
 ## P5_rotation (RQ3): Account rotation (per-slot replacement probability before each coordinated post)
 
@@ -206,15 +206,15 @@ V1 network tracer (from V1's first fixed-offset group):
 | rotation=0.6 | 0.27 | 0.10 | 1.00 |
 | rotation=0.8 | 0.00 | 0.00 | – |
 
-Paired per-seed difference, V1 minus baseline (coordinated: account F1, positive favours V1; organic-only: share of datasets with a flagged group, negative favours V1). Mean [95% CI]:
+Paired per-seed difference, V1 minus baseline (coordinated: account F1, positive favours V1; organic-only: share of datasets with a flagged group, negative favours V1). Mean [95% percentile-bootstrap CI]; exploratory, no multiple-comparison correction:
 
 | Config | vs A overlap-only | vs B original | vs B tuned |
 |---|---|---|---|
 | rotation=0 | +0.02 [+0.01, +0.02] C better | -0.00 [-0.00, +0.00] no clear difference | -0.00 [-0.00, +0.00] no clear difference |
 | rotation=0.1 | +0.09 [+0.08, +0.10] C better | +0.08 [+0.07, +0.09] C better | +0.08 [+0.07, +0.09] C better |
-| rotation=0.2 | +0.02 [-0.09, +0.13] no clear difference | +0.02 [-0.09, +0.12] no clear difference | +0.02 [-0.09, +0.12] no clear difference |
-| rotation=0.4 | -0.22 [-0.29, -0.14] C worse | -0.11 [-0.22, +0.00] no clear difference | -0.11 [-0.23, -0.00] C worse |
-| rotation=0.6 | +0.00 [+0.00, +0.00] C better | -0.12 [-0.16, -0.07] C worse | -0.10 [-0.15, -0.04] C worse |
+| rotation=0.2 | +0.02 [-0.09, +0.12] no clear difference | +0.02 [-0.10, +0.12] no clear difference | +0.02 [-0.10, +0.12] no clear difference |
+| rotation=0.4 | -0.22 [-0.29, -0.14] C worse | -0.11 [-0.22, +0.00] no clear difference | -0.11 [-0.22, -0.01] C worse |
+| rotation=0.6 | +0.00 [+0.00, +0.00] C better | -0.12 [-0.15, -0.07] C worse | -0.10 [-0.15, -0.04] C worse |
 | rotation=0.8 | +0.00 [+0.00, +0.00] no clear difference | -0.01 [-0.02, -0.00] C worse | +0.00 [+0.00, +0.00] no clear difference |
 
 ## P6_notification_bursts (RQ1): Notification bursts: organic-only data plus 35 followers who like each of 3 posts after an exponential delay of the given mean (seconds)
@@ -252,16 +252,16 @@ Paired per-seed difference, V1 minus baseline (coordinated: account F1, positive
 | loyal_delay_mean=1800 | C V1 (strong only) | – | – | – | – | – | 0.00 | 0.00 [0.00, 0.11] | 0.000 | 67.2 |
 | loyal_delay_mean=1800 | B tuned | – | – | – | – | – | 0.03 | 0.03 [0.01, 0.17] | 0.001 | 1.8 |
 
-Paired per-seed difference, V1 minus baseline (coordinated: account F1, positive favours V1; organic-only: share of datasets with a flagged group, negative favours V1). Mean [95% CI]:
+Paired per-seed difference, V1 minus baseline (coordinated: account F1, positive favours V1; organic-only: share of datasets with a flagged group, negative favours V1). Mean [95% percentile-bootstrap CI]; exploratory, no multiple-comparison correction:
 
 | Config | vs A overlap-only | vs B original | vs B tuned |
 |---|---|---|---|
 | loyal_delay_mean=15 | -1.00 [-1.00, -1.00] C better | -1.00 [-1.00, -1.00] C better | -1.00 [-1.00, -1.00] C better |
 | loyal_delay_mean=45 | -1.00 [-1.00, -1.00] C better | -1.00 [-1.00, -1.00] C better | -1.00 [-1.00, -1.00] C better |
 | loyal_delay_mean=120 | -1.00 [-1.00, -1.00] C better | -1.00 [-1.00, -1.00] C better | -1.00 [-1.00, -1.00] C better |
-| loyal_delay_mean=300 | -1.00 [-1.00, -1.00] C better | -0.73 [-0.89, -0.57] C better | -0.97 [-1.03, -0.90] C better |
-| loyal_delay_mean=900 | -1.00 [-1.00, -1.00] C better | +0.00 [+0.00, +0.00] no clear difference | -0.53 [-0.71, -0.35] C better |
-| loyal_delay_mean=1800 | -1.00 [-1.00, -1.00] C better | +0.00 [+0.00, +0.00] no clear difference | -0.03 [-0.10, +0.03] no clear difference |
+| loyal_delay_mean=300 | -1.00 [-1.00, -1.00] C better | -0.73 [-0.87, -0.57] C better | -0.97 [-1.00, -0.90] C better |
+| loyal_delay_mean=900 | -1.00 [-1.00, -1.00] C better | +0.00 [+0.00, +0.00] no clear difference | -0.53 [-0.70, -0.37] C better |
+| loyal_delay_mean=1800 | -1.00 [-1.00, -1.00] C better | +0.00 [+0.00, +0.00] no clear difference | -0.03 [-0.10, +0.00] no clear difference |
 
 ## P7_heavy_users (RQ2): Organic heavy-user activity (weight of the 10% heavy accounts)
 
@@ -308,7 +308,7 @@ Paired per-seed difference, V1 minus baseline (coordinated: account F1, positive
 | heavy_weight=50 (organic-only) | C V1 (strong only) | – | – | – | – | – | 0.00 | 0.00 [0.00, 0.11] | 0.000 | 197.4 |
 | heavy_weight=50 (organic-only) | B tuned | – | – | – | – | – | 0.00 | 0.00 [0.00, 0.11] | 0.000 | 1.6 |
 
-Paired per-seed difference, V1 minus baseline (coordinated: account F1, positive favours V1; organic-only: share of datasets with a flagged group, negative favours V1). Mean [95% CI]:
+Paired per-seed difference, V1 minus baseline (coordinated: account F1, positive favours V1; organic-only: share of datasets with a flagged group, negative favours V1). Mean [95% percentile-bootstrap CI]; exploratory, no multiple-comparison correction:
 
 | Config | vs A overlap-only | vs B original | vs B tuned |
 |---|---|---|---|
@@ -317,8 +317,8 @@ Paired per-seed difference, V1 minus baseline (coordinated: account F1, positive
 | heavy_weight=5 | +0.02 [+0.01, +0.02] C better | -0.00 [-0.00, +0.00] no clear difference | -0.00 [-0.00, +0.00] no clear difference |
 | heavy_weight=5 (organic-only) | +0.00 [+0.00, +0.00] no clear difference | +0.00 [+0.00, +0.00] no clear difference | +0.00 [+0.00, +0.00] no clear difference |
 | heavy_weight=20 | +0.09 [+0.08, +0.11] C better | -0.00 [-0.01, -0.00] C worse | -0.00 [-0.01, -0.00] C worse |
-| heavy_weight=20 (organic-only) | -0.07 [-0.16, +0.02] no clear difference | +0.00 [+0.00, +0.00] no clear difference | +0.00 [+0.00, +0.00] no clear difference |
-| heavy_weight=50 | +0.14 [+0.12, +0.16] C better | -0.01 [-0.01, -0.00] C worse | -0.01 [-0.01, -0.00] C worse |
+| heavy_weight=20 (organic-only) | -0.07 [-0.17, +0.00] no clear difference | +0.00 [+0.00, +0.00] no clear difference | +0.00 [+0.00, +0.00] no clear difference |
+| heavy_weight=50 | +0.14 [+0.13, +0.16] C better | -0.01 [-0.01, -0.00] C worse | -0.01 [-0.01, -0.00] C worse |
 | heavy_weight=50 (organic-only) | +0.00 [+0.00, +0.00] no clear difference | +0.00 [+0.00, +0.00] no clear difference | +0.00 [+0.00, +0.00] no clear difference |
 
 ## P8_jitter (RQ2): Timing jitter (seconds, Gaussian sd per like)
@@ -346,44 +346,55 @@ Paired per-seed difference, V1 minus baseline (coordinated: account F1, positive
 | jitter=80 | C V1 (strong only) | 0.00 [0.00, 0.11] | – | 0.00 | 0.00 ± 0.00 | 0.00 | 0.00 | – | 0.000 | 170.0 |
 | jitter=80 | B tuned | 1.00 [0.89, 1.00] | 1.00 | 1.00 | 1.00 ± 0.00 | 0.00 | 0.00 | – | 0.000 | 3.0 |
 
-Paired per-seed difference, V1 minus baseline (coordinated: account F1, positive favours V1; organic-only: share of datasets with a flagged group, negative favours V1). Mean [95% CI]:
+Paired per-seed difference, V1 minus baseline (coordinated: account F1, positive favours V1; organic-only: share of datasets with a flagged group, negative favours V1). Mean [95% percentile-bootstrap CI]; exploratory, no multiple-comparison correction:
 
 | Config | vs A overlap-only | vs B original | vs B tuned |
 |---|---|---|---|
 | jitter=5 | +0.02 [+0.01, +0.02] C better | -0.00 [-0.00, +0.00] no clear difference | -0.00 [-0.00, +0.00] no clear difference |
 | jitter=20 | +0.01 [+0.00, +0.02] C better | -0.01 [-0.01, -0.00] C worse | -0.01 [-0.01, -0.00] C worse |
 | jitter=40 | -0.57 [-0.69, -0.44] C worse | -0.58 [-0.71, -0.46] C worse | -0.58 [-0.71, -0.46] C worse |
-| jitter=80 | -0.86 [-0.94, -0.77] C worse | -0.87 [-0.96, -0.79] C worse | -0.87 [-0.96, -0.79] C worse |
+| jitter=80 | -0.86 [-0.93, -0.77] C worse | -0.87 [-0.95, -0.78] C worse | -0.87 [-0.95, -0.78] C worse |
 
-## Scoreboard: number of configurations by paired verdict (V1 vs each baseline)
+## Exploratory scoreboard: configurations by paired bootstrap verdict (V1 vs each baseline)
 
-| Experiment | Baseline | V1 better | V1 worse | No clear difference |
-|---|---|---|---|---|
-| P1_headline | A overlap-only | 5 | 0 | 1 |
-| P1_headline | B original | 1 | 0 | 5 |
-| P1_headline | B tuned | 1 | 0 | 5 |
-| P2_cohort_spread | A overlap-only | 5 | 0 | 0 |
-| P2_cohort_spread | B original | 1 | 0 | 4 |
-| P2_cohort_spread | B tuned | 0 | 0 | 5 |
-| P3_random_delays | A overlap-only | 0 | 3 | 0 |
-| P3_random_delays | B original | 0 | 2 | 1 |
-| P3_random_delays | B tuned | 0 | 3 | 0 |
-| P4_participation | A overlap-only | 3 | 0 | 2 |
-| P4_participation | B original | 0 | 2 | 3 |
-| P4_participation | B tuned | 0 | 2 | 3 |
-| P5_rotation | A overlap-only | 3 | 1 | 2 |
-| P5_rotation | B original | 1 | 2 | 3 |
-| P5_rotation | B tuned | 1 | 2 | 3 |
-| P6_notification_bursts | A overlap-only | 6 | 0 | 0 |
-| P6_notification_bursts | B original | 4 | 0 | 2 |
-| P6_notification_bursts | B tuned | 5 | 0 | 1 |
-| P7_heavy_users | A overlap-only | 4 | 0 | 4 |
-| P7_heavy_users | B original | 0 | 2 | 6 |
-| P7_heavy_users | B tuned | 0 | 2 | 6 |
-| P8_jitter | A overlap-only | 2 | 2 | 0 |
-| P8_jitter | B original | 0 | 3 | 1 |
-| P8_jitter | B tuned | 0 | 3 | 1 |
-| **all** | A overlap-only | 28 | 6 | 9 |
-| **all** | B original | 7 | 11 | 25 |
-| **all** | B tuned | 7 | 12 | 24 |
+Coordinated configurations are judged on account F1 (higher is better); organic-only configurations on the share of datasets with any flagged group (lower is better). The two kinds are counted separately and never combined. No multiple-comparison correction: treat the counts as descriptive.
+
+| Experiment | Kind | Baseline | V1 better | V1 worse | No clear difference |
+|---|---|---|---|---|---|
+| P1_headline | coordinated | A overlap-only | 3 | 0 | 0 |
+| P1_headline | coordinated | B original | 0 | 0 | 3 |
+| P1_headline | coordinated | B tuned | 0 | 0 | 3 |
+| P1_headline | organic-only | A overlap-only | 2 | 0 | 1 |
+| P1_headline | organic-only | B original | 1 | 0 | 2 |
+| P1_headline | organic-only | B tuned | 1 | 0 | 2 |
+| P2_cohort_spread | coordinated | A overlap-only | 5 | 0 | 0 |
+| P2_cohort_spread | coordinated | B original | 2 | 0 | 3 |
+| P2_cohort_spread | coordinated | B tuned | 0 | 0 | 5 |
+| P3_random_delays | coordinated | A overlap-only | 0 | 3 | 0 |
+| P3_random_delays | coordinated | B original | 0 | 2 | 1 |
+| P3_random_delays | coordinated | B tuned | 0 | 3 | 0 |
+| P4_participation | coordinated | A overlap-only | 3 | 0 | 2 |
+| P4_participation | coordinated | B original | 0 | 2 | 3 |
+| P4_participation | coordinated | B tuned | 0 | 2 | 3 |
+| P5_rotation | coordinated | A overlap-only | 3 | 1 | 2 |
+| P5_rotation | coordinated | B original | 1 | 2 | 3 |
+| P5_rotation | coordinated | B tuned | 1 | 2 | 3 |
+| P6_notification_bursts | organic-only | A overlap-only | 6 | 0 | 0 |
+| P6_notification_bursts | organic-only | B original | 4 | 0 | 2 |
+| P6_notification_bursts | organic-only | B tuned | 5 | 0 | 1 |
+| P7_heavy_users | coordinated | A overlap-only | 4 | 0 | 0 |
+| P7_heavy_users | coordinated | B original | 0 | 2 | 2 |
+| P7_heavy_users | coordinated | B tuned | 0 | 2 | 2 |
+| P7_heavy_users | organic-only | A overlap-only | 0 | 0 | 4 |
+| P7_heavy_users | organic-only | B original | 0 | 0 | 4 |
+| P7_heavy_users | organic-only | B tuned | 0 | 0 | 4 |
+| P8_jitter | coordinated | A overlap-only | 2 | 2 | 0 |
+| P8_jitter | coordinated | B original | 0 | 3 | 1 |
+| P8_jitter | coordinated | B tuned | 0 | 3 | 1 |
+| **all** | coordinated | A overlap-only | 20 | 6 | 4 |
+| **all** | coordinated | B original | 3 | 11 | 16 |
+| **all** | coordinated | B tuned | 1 | 12 | 17 |
+| **all** | organic-only | A overlap-only | 8 | 0 | 5 |
+| **all** | organic-only | B original | 5 | 0 | 8 |
+| **all** | organic-only | B tuned | 6 | 0 | 7 |
 
