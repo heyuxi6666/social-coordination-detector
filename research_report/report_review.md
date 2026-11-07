@@ -24,7 +24,7 @@
 | 5 | Invalid interval bounds | 4 of 129 paired normal intervals fell outside [−1, 1] (lowest −1.032), and 23 per-configuration F1 intervals (mean ± 1.96 SE) crossed 0 or 1. Corrected as described in the notes. | `IntervalTests` in `tests/test_phase2.py`. |
 | 6 | Length | Figure 2 removed, with its key values kept in Table 3. Bullet lists turned into prose, and repeated statements removed. | Figure 1 kept, now with valid intervals. See section 2 below. |
 | 7 | Citations | Descriptions of CopyCatch, SynchroTrap and Pacheco et al. checked against the papers' own text. A bootstrap reference was added (Efron 1979, Crossref-verified). | See section 4. |
-| 8 | Code availability | Now reads "Evaluation code available on request." Only the published V1 repository is named. | The `research-evaluation` branch is still local. |
+| 8 | Code availability | Header reads "Evaluation code: https://github.com/heyuxi6666/social-coordination-detector/tree/research-evaluation" (updated at publication; earlier revisions said "available on request"). | The branch was pushed after the final checks. |
 | 9 | This document | Rewritten. | – |
 | 10 | Verification | Done. | See section 3. |
 
@@ -110,5 +110,5 @@ The ACM Digital Library refused automated access, so the CopyCatch and SynchroTr
 Yes, provided you check these points:
 1. **Figure files.** Use the PNG figure, which is a 2× render, or the SVG.
 2. **Fit and legibility.** Check that Tables 1–3 fit the page width at 9 pt or larger.
-3. **Repository link.** Optionally add the public V1 repository URL. The evaluation code stays "available on request" until you publish the branch.
+3. **Repository link.** The header links the published `research-evaluation` branch; the PDF was rebuilt after the link was added.
 4. **Name and affiliation.** Confirm both before sending.

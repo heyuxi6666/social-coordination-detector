@@ -209,7 +209,7 @@ if not (HERE / "Yuxi_He_Research_Report.pdf").exists():
     failures.append("the PDF referenced from the README is missing")
 
 # ---- statements that must be present
-for text in ("Evaluation code available on request.", "**Yuxi He**\nPostgraduate Cyber Security student\nThe University of Queensland",
+for text in ("Evaluation code: https://github.com/heyuxi6666/social-coordination-detector/tree/research-evaluation", "**Yuxi He**\nPostgraduate Cyber Security student\nThe University of Queensland",
              "https://github.com/heyuxi6666/social-coordination-detector",
              "never combined", "exploratory"):
     check(text)

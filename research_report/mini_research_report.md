@@ -4,7 +4,7 @@
 Postgraduate Cyber Security student
 The University of Queensland · November 2026
 Detector V1 (MIT licence): https://github.com/heyuxi6666/social-coordination-detector
-Evaluation code available on request.
+Evaluation code: https://github.com/heyuxi6666/social-coordination-detector/tree/research-evaluation
 
 ## Abstract
 
