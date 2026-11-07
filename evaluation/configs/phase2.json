@@ -1,0 +1,31 @@
+{
+  "seeds": 30,
+  "base_seed": 5000,
+  "defaults": {},
+  "experiments": [
+    {"id": "P1_headline", "rq": "RQ1", "trace": false,
+     "title": "Headline scenarios at default settings",
+     "configs": [
+       {"label": "coordinated", "params": {}},
+       {"label": "coordinated, adjacent ids + repost signal", "params": {"id_adjacent": true, "repost_signal": true}},
+       {"label": "organic-only", "params": {"group_size": 0}},
+       {"label": "organic + loyal followers", "params": {"group_size": 0, "loyal_followers": 35}},
+       {"label": "organic + notification burst", "params": {"group_size": 0, "loyal_followers": 35, "loyal_delay_mean": 45}},
+       {"label": "coordinated + loyal followers", "params": {"loyal_followers": 35}}
+     ]},
+    {"id": "P2_cohort_spread", "rq": "RQ2", "title": "Cohort spread (seconds over which the group's personal delays are spread), fixed per-account delays",
+     "sweep": {"cohort_spread": [120, 300, 600, 1000, 2000]}},
+    {"id": "P3_random_delays", "rq": "RQ2", "title": "Independently randomised reaction delays (no repeated per-account offset)",
+     "base": {"delay_mode": "random"}, "sweep": {"cohort_spread": [120, 600, 2000]}},
+    {"id": "P4_participation", "rq": "RQ2", "title": "Participation rate of group accounts per coordinated post",
+     "sweep": {"participation": [1.0, 0.8, 0.6, 0.4, 0.2]}},
+    {"id": "P5_rotation", "rq": "RQ3", "trace": true, "title": "Account rotation (per-slot replacement probability before each coordinated post)",
+     "sweep": {"rotation": [0, 0.1, 0.2, 0.4, 0.6, 0.8]}},
+    {"id": "P6_notification_bursts", "rq": "RQ1", "title": "Notification bursts: organic-only data plus 35 followers who like each of 3 posts after an exponential delay of the given mean (seconds)",
+     "base": {"group_size": 0, "loyal_followers": 35}, "sweep": {"loyal_delay_mean": [15, 45, 120, 300, 900, 1800]}},
+    {"id": "P7_heavy_users", "rq": "RQ2", "title": "Organic heavy-user activity (weight of the 10% heavy accounts)", "null_too": true,
+     "sweep": {"heavy_weight": [1, 5, 20, 50]}},
+    {"id": "P8_jitter", "rq": "RQ2", "title": "Timing jitter (seconds, Gaussian sd per like)",
+     "sweep": {"jitter": [5, 20, 40, 80]}}
+  ]
+}

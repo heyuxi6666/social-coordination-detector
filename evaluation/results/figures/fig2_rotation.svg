@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 306" width="760" height="306" font-family="Helvetica, Arial, sans-serif">
+<style>.title{font-size:13px;font-weight:bold;fill:#222}.axis{font-size:12px;fill:#333}.tick{font-size:11px;fill:#444}.grid{stroke:#ddd;stroke-width:1}.leg{font-size:12px;fill:#222}.cap{font-size:11px;fill:#555}</style>
+<rect width="760" height="306" fill="#ffffff"/>
+<text x="58" y="20" class="title">(a) Account rotation: account F1</text>
+<line x1="58" x2="364" y1="204.0" y2="204.0" class="grid"/>
+<text x="52" y="208.0" class="tick" text-anchor="end">0.00</text>
+<line x1="58" x2="364" y1="164.0" y2="164.0" class="grid"/>
+<text x="52" y="168.0" class="tick" text-anchor="end">0.25</text>
+<line x1="58" x2="364" y1="124.0" y2="124.0" class="grid"/>
+<text x="52" y="128.0" class="tick" text-anchor="end">0.50</text>
+<line x1="58" x2="364" y1="84.0" y2="84.0" class="grid"/>
+<text x="52" y="88.0" class="tick" text-anchor="end">0.75</text>
+<line x1="58" x2="364" y1="44.0" y2="44.0" class="grid"/>
+<text x="52" y="48.0" class="tick" text-anchor="end">1.00</text>
+<text x="74.0" y="220" class="tick" text-anchor="middle">0</text>
+<text x="128.8" y="220" class="tick" text-anchor="middle">0.1</text>
+<text x="183.6" y="220" class="tick" text-anchor="middle">0.2</text>
+<text x="238.4" y="220" class="tick" text-anchor="middle">0.4</text>
+<text x="293.2" y="220" class="tick" text-anchor="middle">0.6</text>
+<text x="348.0" y="220" class="tick" text-anchor="middle">0.8</text>
+<text x="211" y="250" class="axis" text-anchor="middle">slot replacement probability</text>
+<text transform="translate(14,124) rotate(-90)" class="axis" text-anchor="middle">account F1 (mean, 95% CI)</text>
+<path d="M69.0,47.1 L123.8,72.1 L178.6,96.8 L233.4,115.7 L288.2,187.6 L343.0,204.0" fill="none" stroke="#E69F00" stroke-width="2" stroke-dasharray="6 3"/>
+<line x1="69.0" x2="69.0" y1="48.1" y2="46.1" stroke="#E69F00" stroke-width="1.2"/>
+<rect x="65.0" y="43.1" width="8" height="8" fill="#E69F00" stroke="#ffffff" stroke-width="0.8"/>
+<line x1="123.8" x2="123.8" y1="75.1" y2="69.1" stroke="#E69F00" stroke-width="1.2"/>
+<rect x="119.8" y="68.1" width="8" height="8" fill="#E69F00" stroke="#ffffff" stroke-width="0.8"/>
+<line x1="178.6" x2="178.6" y1="100.1" y2="93.4" stroke="#E69F00" stroke-width="1.2"/>
+<rect x="174.6" y="92.8" width="8" height="8" fill="#E69F00" stroke="#ffffff" stroke-width="0.8"/>
+<line x1="233.4" x2="233.4" y1="124.8" y2="106.6" stroke="#E69F00" stroke-width="1.2"/>
+<rect x="229.4" y="111.7" width="8" height="8" fill="#E69F00" stroke="#ffffff" stroke-width="0.8"/>
+<line x1="288.2" x2="288.2" y1="197.1" y2="178.0" stroke="#E69F00" stroke-width="1.2"/>
+<rect x="284.2" y="183.6" width="8" height="8" fill="#E69F00" stroke="#ffffff" stroke-width="0.8"/>
+<line x1="343.0" x2="343.0" y1="204.0" y2="204.0" stroke="#E69F00" stroke-width="1.2"/>
+<rect x="339.0" y="200.0" width="8" height="8" fill="#E69F00" stroke="#ffffff" stroke-width="0.8"/>
+<path d="M74.0,44.0 L128.8,70.3 L183.6,95.6 L238.4,137.7 L293.2,178.9 L348.0,202.8" fill="none" stroke="#009E73" stroke-width="2" stroke-dasharray="2 3"/>
+<line x1="74.0" x2="74.0" y1="44.0" y2="44.0" stroke="#009E73" stroke-width="1.2"/>
+<polygon points="74.0,39.0 69.0,48.0 79.0,48.0" fill="#009E73" stroke="#ffffff" stroke-width="0.8"/>
+<line x1="128.8" x2="128.8" y1="73.1" y2="67.5" stroke="#009E73" stroke-width="1.2"/>
+<polygon points="128.8,65.3 123.8,74.3 133.8,74.3" fill="#009E73" stroke="#ffffff" stroke-width="0.8"/>
+<line x1="183.6" x2="183.6" y1="99.1" y2="92.1" stroke="#009E73" stroke-width="1.2"/>
+<polygon points="183.6,90.6 178.6,99.6 188.6,99.6" fill="#009E73" stroke="#ffffff" stroke-width="0.8"/>
+<line x1="238.4" x2="238.4" y1="141.2" y2="134.2" stroke="#009E73" stroke-width="1.2"/>
+<polygon points="238.4,132.7 233.4,141.7 243.4,141.7" fill="#009E73" stroke="#ffffff" stroke-width="0.8"/>
+<line x1="293.2" x2="293.2" y1="183.7" y2="174.2" stroke="#009E73" stroke-width="1.2"/>
+<polygon points="293.2,173.9 288.2,182.9 298.2,182.9" fill="#009E73" stroke="#ffffff" stroke-width="0.8"/>
+<line x1="348.0" x2="348.0" y1="204.0" y2="201.5" stroke="#009E73" stroke-width="1.2"/>
+<polygon points="348.0,197.8 343.0,206.8 353.0,206.8" fill="#009E73" stroke="#ffffff" stroke-width="0.8"/>
+<path d="M79.0,44.2 L133.8,56.4 L188.6,95.2 L243.4,133.8 L298.2,187.4 L353.0,204.0" fill="none" stroke="#0072B2" stroke-width="2"/>
+<line x1="79.0" x2="79.0" y1="44.5" y2="44.0" stroke="#0072B2" stroke-width="1.2"/>
+<circle cx="79.0" cy="44.2" r="4" fill="#0072B2" stroke="#ffffff" stroke-width="0.8"/>
+<line x1="133.8" x2="133.8" y1="58.3" y2="54.4" stroke="#0072B2" stroke-width="1.2"/>
+<circle cx="133.8" cy="56.4" r="4" fill="#0072B2" stroke="#ffffff" stroke-width="0.8"/>
+<line x1="188.6" x2="188.6" y1="119.8" y2="70.6" stroke="#0072B2" stroke-width="1.2"/>
+<circle cx="188.6" cy="95.2" r="4" fill="#0072B2" stroke="#ffffff" stroke-width="0.8"/>
+<line x1="243.4" x2="243.4" y1="152.0" y2="115.6" stroke="#0072B2" stroke-width="1.2"/>
+<circle cx="243.4" cy="133.8" r="4" fill="#0072B2" stroke="#ffffff" stroke-width="0.8"/>
+<line x1="298.2" x2="298.2" y1="197.0" y2="177.7" stroke="#0072B2" stroke-width="1.2"/>
+<circle cx="298.2" cy="187.4" r="4" fill="#0072B2" stroke="#ffffff" stroke-width="0.8"/>
+<line x1="353.0" x2="353.0" y1="204.0" y2="204.0" stroke="#0072B2" stroke-width="1.2"/>
+<circle cx="353.0" cy="204.0" r="4" fill="#0072B2" stroke="#ffffff" stroke-width="0.8"/>
+<text x="438" y="20" class="title">(b) Account rotation: group detection</text>
+<line x1="438" x2="744" y1="204.0" y2="204.0" class="grid"/>
+<text x="432" y="208.0" class="tick" text-anchor="end">0.00</text>
+<line x1="438" x2="744" y1="164.0" y2="164.0" class="grid"/>
+<text x="432" y="168.0" class="tick" text-anchor="end">0.25</text>
+<line x1="438" x2="744" y1="124.0" y2="124.0" class="grid"/>
+<text x="432" y="128.0" class="tick" text-anchor="end">0.50</text>
+<line x1="438" x2="744" y1="84.0" y2="84.0" class="grid"/>
+<text x="432" y="88.0" class="tick" text-anchor="end">0.75</text>
+<line x1="438" x2="744" y1="44.0" y2="44.0" class="grid"/>
+<text x="432" y="48.0" class="tick" text-anchor="end">1.00</text>
+<text x="454.0" y="220" class="tick" text-anchor="middle">0</text>
+<text x="508.8" y="220" class="tick" text-anchor="middle">0.1</text>
+<text x="563.6" y="220" class="tick" text-anchor="middle">0.2</text>
+<text x="618.4" y="220" class="tick" text-anchor="middle">0.4</text>
+<text x="673.2" y="220" class="tick" text-anchor="middle">0.6</text>
+<text x="728.0" y="220" class="tick" text-anchor="middle">0.8</text>
+<text x="591" y="250" class="axis" text-anchor="middle">slot replacement probability</text>
+<text transform="translate(394,124) rotate(-90)" class="axis" text-anchor="middle">datasets with group detected (95% CI)</text>
+<path d="M449.0,44.0 L503.8,44.0 L558.6,44.0 L613.4,52.0 L668.2,204.0 L723.0,204.0" fill="none" stroke="#E69F00" stroke-width="2" stroke-dasharray="6 3"/>
+<line x1="449.0" x2="449.0" y1="69.8" y2="44.0" stroke="#E69F00" stroke-width="1.2"/>
+<rect x="445.0" y="40.0" width="8" height="8" fill="#E69F00" stroke="#ffffff" stroke-width="0.8"/>
+<line x1="503.8" x2="503.8" y1="69.8" y2="44.0" stroke="#E69F00" stroke-width="1.2"/>
+<rect x="499.8" y="40.0" width="8" height="8" fill="#E69F00" stroke="#ffffff" stroke-width="0.8"/>
+<line x1="558.6" x2="558.6" y1="69.8" y2="44.0" stroke="#E69F00" stroke-width="1.2"/>
+<rect x="554.6" y="40.0" width="8" height="8" fill="#E69F00" stroke="#ffffff" stroke-width="0.8"/>
+<line x1="613.4" x2="613.4" y1="81.8" y2="45.4" stroke="#E69F00" stroke-width="1.2"/>
+<rect x="609.4" y="48.0" width="8" height="8" fill="#E69F00" stroke="#ffffff" stroke-width="0.8"/>
+<line x1="668.2" x2="668.2" y1="204.0" y2="178.2" stroke="#E69F00" stroke-width="1.2"/>
+<rect x="664.2" y="200.0" width="8" height="8" fill="#E69F00" stroke="#ffffff" stroke-width="0.8"/>
+<line x1="723.0" x2="723.0" y1="204.0" y2="178.2" stroke="#E69F00" stroke-width="1.2"/>
+<rect x="719.0" y="200.0" width="8" height="8" fill="#E69F00" stroke="#ffffff" stroke-width="0.8"/>
+<path d="M454.0,44.0 L508.8,44.0 L563.6,44.0 L618.4,44.0 L673.2,52.0 L728.0,180.0" fill="none" stroke="#009E73" stroke-width="2" stroke-dasharray="2 3"/>
+<line x1="454.0" x2="454.0" y1="69.8" y2="44.0" stroke="#009E73" stroke-width="1.2"/>
+<polygon points="454.0,39.0 449.0,48.0 459.0,48.0" fill="#009E73" stroke="#ffffff" stroke-width="0.8"/>
+<line x1="508.8" x2="508.8" y1="69.8" y2="44.0" stroke="#009E73" stroke-width="1.2"/>
+<polygon points="508.8,39.0 503.8,48.0 513.8,48.0" fill="#009E73" stroke="#ffffff" stroke-width="0.8"/>
+<line x1="563.6" x2="563.6" y1="69.8" y2="44.0" stroke="#009E73" stroke-width="1.2"/>
+<polygon points="563.6,39.0 558.6,48.0 568.6,48.0" fill="#009E73" stroke="#ffffff" stroke-width="0.8"/>
+<line x1="618.4" x2="618.4" y1="69.8" y2="44.0" stroke="#009E73" stroke-width="1.2"/>
+<polygon points="618.4,39.0 613.4,48.0 623.4,48.0" fill="#009E73" stroke="#ffffff" stroke-width="0.8"/>
+<line x1="673.2" x2="673.2" y1="81.8" y2="45.4" stroke="#009E73" stroke-width="1.2"/>
+<polygon points="673.2,47.0 668.2,56.0 678.2,56.0" fill="#009E73" stroke="#ffffff" stroke-width="0.8"/>
+<line x1="728.0" x2="728.0" y1="195.6" y2="146.3" stroke="#009E73" stroke-width="1.2"/>
+<polygon points="728.0,175.0 723.0,184.0 733.0,184.0" fill="#009E73" stroke="#ffffff" stroke-width="0.8"/>
+<path d="M459.0,44.0 L513.8,44.0 L568.6,76.0 L623.4,108.0 L678.2,204.0 L733.0,204.0" fill="none" stroke="#0072B2" stroke-width="2"/>
+<line x1="459.0" x2="459.0" y1="69.8" y2="44.0" stroke="#0072B2" stroke-width="1.2"/>
+<circle cx="459.0" cy="44.0" r="4" fill="#0072B2" stroke="#ffffff" stroke-width="0.8"/>
+<line x1="513.8" x2="513.8" y1="69.8" y2="44.0" stroke="#0072B2" stroke-width="1.2"/>
+<circle cx="513.8" cy="44.0" r="4" fill="#0072B2" stroke="#ffffff" stroke-width="0.8"/>
+<line x1="568.6" x2="568.6" y1="110.6" y2="56.9" stroke="#0072B2" stroke-width="1.2"/>
+<circle cx="568.6" cy="76.0" r="4" fill="#0072B2" stroke="#ffffff" stroke-width="0.8"/>
+<line x1="623.4" x2="623.4" y1="142.1" y2="79.0" stroke="#0072B2" stroke-width="1.2"/>
+<circle cx="623.4" cy="108.0" r="4" fill="#0072B2" stroke="#ffffff" stroke-width="0.8"/>
+<line x1="678.2" x2="678.2" y1="204.0" y2="178.2" stroke="#0072B2" stroke-width="1.2"/>
+<circle cx="678.2" cy="204.0" r="4" fill="#0072B2" stroke="#ffffff" stroke-width="0.8"/>
+<line x1="733.0" x2="733.0" y1="204.0" y2="178.2" stroke="#0072B2" stroke-width="1.2"/>
+<circle cx="733.0" cy="204.0" r="4" fill="#0072B2" stroke="#ffffff" stroke-width="0.8"/>
+<rect x="54.0" y="266.0" width="8" height="8" fill="#E69F00" stroke="#ffffff" stroke-width="0.8"/>
+<text x="68" y="274" class="leg">A overlap-only</text>
+<polygon points="180.0,265.0 175.0,274.0 185.0,274.0" fill="#009E73" stroke="#ffffff" stroke-width="0.8"/>
+<text x="190" y="274" class="leg">B time-bucket</text>
+<circle cx="295.0" cy="270.0" r="4" fill="#0072B2" stroke="#ffffff" stroke-width="0.8"/>
+<text x="305" y="274" class="leg">C V1 detector</text>
+<text x="58" y="296" class="cap">Figure 2 (RQ3). 20 seeds per point; synthetic; categorical x axis; points offset by method; new accounts keep the slot delay.</text>
+</svg>

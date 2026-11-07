@@ -1,0 +1,21 @@
+{
+  "parameters": {
+    "bucket_seconds": 2400,
+    "min_group_accounts": 15
+  },
+  "tuning_score": 0.6914,
+  "tuning_mean_f1": 0.9414,
+  "tuning_mean_false_positive_rate": 0.25,
+  "original_parameters": {
+    "bucket_seconds": 300,
+    "min_group_accounts": 5
+  },
+  "original_tuning_score": 0.6771,
+  "tuning_seeds": [
+    2000,
+    2019
+  ],
+  "scenarios": 11,
+  "grid_cells": 42,
+  "objective": "mean coordinated-scenario F1 minus mean organic-scenario false-positive rate"
+}
