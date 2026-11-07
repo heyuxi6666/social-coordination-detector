@@ -1,7 +1,10 @@
 # Evaluating Temporal Coordination Detection: False-Positive Control and Robustness under Synthetic Engagement Behaviour
 
-**Yuxi He** · Postgraduate Cyber Security student, The University of Queensland · November 2026
-Detector V1: `social-coordination-detector` (MIT licence). Evaluation code available on request.
+**Yuxi He**
+Postgraduate Cyber Security student
+The University of Queensland · November 2026
+Detector V1 (MIT licence): https://github.com/heyuxi6666/social-coordination-detector
+Evaluation code available on request.
 
 ## Abstract
 

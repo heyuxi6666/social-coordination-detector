@@ -183,7 +183,8 @@ rt = lambda m: float(SUMMARY[(H + "coordinated", m)]["runtime_ms_median"])
 check(f"median runtime per dataset was {rt('C_v1'):.1f} ms for V1, {rt('B_tuned'):.1f} ms for tuned B and {rt('A_overlap_only'):.1f} ms for A")
 
 # ---- statements that must be present
-for text in ("Evaluation code available on request.", "**Yuxi He** · Postgraduate Cyber Security student, The University of Queensland",
+for text in ("Evaluation code available on request.", "**Yuxi He**\nPostgraduate Cyber Security student\nThe University of Queensland",
+             "https://github.com/heyuxi6666/social-coordination-detector",
              "never combined", "exploratory"):
     check(text)
 if "Figure 2" in REPORT or "figure2" in REPORT:
