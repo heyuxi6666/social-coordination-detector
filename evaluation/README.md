@@ -96,6 +96,6 @@ New generator options: `delay_mode` ("fixed" or "random": independently redrawn 
 
 ### Interval amendment (7 November 2026)
 
-Paired comparisons now also carry seeded percentile-bootstrap intervals. The pre-registered normal-approximation intervals exceeded [−1, 1] in 4 of 129 comparisons. See the amendment in [PHASE2_PROTOCOL.md](PHASE2_PROTOCOL.md).
+Paired comparisons now also carry seeded percentile-bootstrap intervals. The originally specified normal-approximation intervals exceeded [−1, 1] in 4 of 129 comparisons. See the amendment in [PHASE2_PROTOCOL.md](PHASE2_PROTOCOL.md).
 
 The per-configuration F1 error bars in `results*/figures/` are still mean ± 1.96 SE, clipped to [0, 1]. The report's Figure 1(b) instead uses bootstrap intervals computed from the raw results (`research_report/make_figures.py`).

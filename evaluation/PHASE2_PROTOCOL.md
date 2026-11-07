@@ -58,7 +58,7 @@ No machine learning, no claim about real-platform accuracy, no change to V1.
 
 Added after the held-out results had been read, during the report revision. No experiment was rerun and no parameter changed.
 
-- The pre-registered paired intervals (mean ± 1.96 SE) fall outside the valid range [−1, 1] in 4 of 129 comparisons (lowest −1.032), because some per-seed differences are nearly constant.
+- The originally specified paired intervals (mean ± 1.96 SE) fall outside the valid range [−1, 1] in 4 of 129 comparisons (lowest −1.032), because some per-seed differences are nearly constant.
 - `summarize_phase2.py` now also computes a seeded percentile-bootstrap interval (10,000 resamples) for every paired difference. These intervals always stay within the observed range.
 - `paired_comparisons.csv` keeps the original columns (`ci_low`, `ci_high`, `verdict`) and adds `boot_low`, `boot_high` and `verdict_bootstrap`. `tables.md` and the report use the bootstrap columns.
 - Only one verdict differs between the two methods: cohort spread 1,000 s against the original time-bucket baseline, where the mean difference is 0.005 F1. Every comparison against the tuned baseline has the same verdict under both methods.

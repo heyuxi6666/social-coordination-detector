@@ -100,7 +100,7 @@ changed = [r for r in PAIRED_ROWS if r["verdict"] != r["verdict_bootstrap"]]
 check("the verdicts are unchanged except in one negligible comparison",
       len(changed) == 1 and abs(float(changed[0]["mean_difference"])) < 0.02)
 check("10,000 resamples")
-check("pre-registered paired intervals (mean ± 1.96 SE)")                    # a definition, not a result
+check("originally specified paired intervals (mean ± 1.96 SE)")                    # a definition, not a result
 
 # ---- organic-only aggregates
 organic = [r for r in RAW if r["detected"] == ""]

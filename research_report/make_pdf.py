@@ -22,14 +22,15 @@ OUTPUT = HERE / "Yuxi_He_Research_Report.pdf"
 EDGE_CANDIDATES = (r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe", r"C:\Program Files\Microsoft\Edge\Application\msedge.exe")
 
 CSS = """
-@page { size: A4; margin: 17mm 18mm 17mm 18mm; }
-html { font-family: 'Times New Roman', Times, serif; font-size: 11pt; line-height: 1.26; color: #111; font-variant-ligatures: none; }
+@page { size: A4; margin: 16mm 18mm 16mm 18mm; }
+html { font-family: 'Times New Roman', Times, serif; font-size: 11pt; line-height: 1.2; color: #111; font-variant-ligatures: none; }
 body { margin: 0; }
 h1 { font-size: 15.5pt; line-height: 1.2; margin: 0 0 5pt 0; text-align: left; }
 .author { margin: 0 0 8pt 0; font-size: 10.5pt; line-height: 1.3; }
 .author b { font-size: 11.5pt; }
-h2 { font-size: 12pt; margin: 9pt 0 3pt 0; break-after: avoid; }
-p { margin: 3pt 0; text-align: justify; hyphens: auto; }
+h2 { font-size: 12pt; margin: 7pt 0 2pt 0; break-after: avoid; }
+p { margin: 3pt 0; text-align: justify; hyphens: auto; orphans: 3; widows: 3; }
+.keep { break-inside: avoid; }
 ul { margin: 3pt 0 3pt 16pt; padding: 0; }
 li { margin: 1pt 0; text-align: justify; }
 table { border-collapse: collapse; width: 100%; margin: 3pt 0 5pt 0; font-size: 9pt; line-height: 1.2; break-inside: avoid; }
@@ -107,7 +108,7 @@ def convert(markdown: str) -> str:
             out.append("<ul>" + "".join(f"<li>{x}</li>" for x in items) + "</ul>")
             continue
         elif line.strip():
-            css = " class='caption table-caption'" if line.startswith("**Table") else ""
+            css = " class='caption table-caption'" if line.startswith("**Table") else (" class=keep" if line.startswith("**Exploratory summary") else "")
             out.append(f"<p{css}>{inline(line)}</p>")
         i += 1
     if refs:
